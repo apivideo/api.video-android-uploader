@@ -22,6 +22,8 @@ class VideoUploader(
         private val boundary: String = "----WebKitFormBoundary" + System.currentTimeMillis()
     }
 
+    private val userAgent = "api.video uploader (android; v:0.0.5; )"
+
     init {
         if(chunkLength < 1024L * 1024L * 5 || chunkLength > 1024L * 1024L * 128) {
             throw IllegalArgumentException("Invalid chunk size: must be greater that 5MB and smaller than 128MB");
@@ -80,6 +82,7 @@ class VideoUploader(
         val requestBuilder = Request.Builder()
             .url(apiPath)
             .addHeader("Content-Type", "multipart/form-data; boundary=$boundary")
+            .addHeader("User-Agent", userAgent)
             .post(requestBody)
 
         if(bearerToken != null) {
@@ -152,6 +155,7 @@ class VideoUploader(
                         "Content-Range",
                         "bytes ${offset.toInt()}-$currentPosition/${file.length().toInt()}"
                     )
+                    .addHeader("User-Agent", userAgent)
                     .post(body)
 
                 if(bearerToken != null) {
