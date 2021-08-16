@@ -1,4 +1,4 @@
-package video.api.androidkotlinsdk.model
+package video.api.videouploader_module
 
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl

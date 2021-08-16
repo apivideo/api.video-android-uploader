@@ -1,7 +1,6 @@
 package video.api.videouploader_module
 
 import org.json.JSONObject
-import video.api.androidkotlinsdk.model.getStringOrNull
 
 class ApiError(val body: JSONObject) {
 

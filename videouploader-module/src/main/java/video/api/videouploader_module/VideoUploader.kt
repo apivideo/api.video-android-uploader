@@ -4,7 +4,6 @@ import android.util.Log
 import okhttp3.*
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
-import video.api.androidkotlinsdk.RequestBodyUtil
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -22,7 +21,7 @@ class VideoUploader(
         private val boundary: String = "----WebKitFormBoundary" + System.currentTimeMillis()
     }
 
-    private val userAgent = "api.video uploader (android; v:0.0.5; )"
+    private val userAgent = "api.video uploader (android; v:0.0.6; )"
 
     init {
         if(chunkLength < 1024L * 1024L * 5 || chunkLength > 1024L * 1024L * 128) {

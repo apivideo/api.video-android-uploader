@@ -1,4 +1,4 @@
-package video.api.androidkotlinsdk
+package video.api.videouploader_module
 
 import okhttp3.MediaType
 import okhttp3.RequestBody
