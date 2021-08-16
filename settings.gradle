@@ -1,0 +1,3 @@
+include ':videouploader-module'
+include ':app'
+rootProject.name = "app"
