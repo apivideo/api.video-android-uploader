@@ -16,6 +16,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
+import java.lang.IllegalArgumentException
 import java.net.URI
 import java.util.concurrent.CountDownLatch
 
@@ -29,7 +30,7 @@ class UploaderTests {
 
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
     val client = OkHttpClient();
-    val uploader = VideoUploader("https://ws.api.video", UploaderRequestExecutorImpl(client), client);
+
 
     class TestSuccessCallBack(private val signal: CountDownLatch) : CallBack {
         override fun onError(apiError: ApiError) {
@@ -49,8 +50,36 @@ class UploaderTests {
     }
 
     @Test
+    fun invalidChunkSize() {
+        try {
+            val videoUploader = VideoUploader(
+                "https://ws.api.video",
+                UploaderRequestExecutorImpl(client),
+                client,
+                1024 * 1024 * 4
+            )
+            assertNull(videoUploader)
+        } catch(e: IllegalArgumentException) {
+            assertTrue(true)
+        }
+
+        try {
+            val videoUploader = VideoUploader(
+                "https://ws.api.video",
+                UploaderRequestExecutorImpl(client),
+                client,
+                1024 * 1024 * 130
+            )
+            assertNull(videoUploader)
+        } catch(e: IllegalArgumentException) {
+            assertTrue(true)
+        }
+    }
+
+    @Test
     fun uploadSmallFile() {
         val signal = CountDownLatch(1)
+        val uploader = VideoUploader("https://ws.api.video", UploaderRequestExecutorImpl(client), client);
         uploader.uploadWithDelegatedToken("to4UcvhqOJLLE3NBRBl7TtGJ", File(assetToFIle("574k.mp4")), TestSuccessCallBack(signal))
         signal.await();
     }
@@ -58,6 +87,7 @@ class UploaderTests {
     @Test
     fun uploadBigFile() {
         val signal = CountDownLatch(1)
+        val uploader = VideoUploader("https://ws.api.video", UploaderRequestExecutorImpl(client), client, 1024*1024*5);
         uploader.uploadWithDelegatedToken("to4UcvhqOJLLE3NBRBl7TtGJ", File(assetToFIle("10m.mp4")), TestSuccessCallBack(signal))
         signal.await();
     }

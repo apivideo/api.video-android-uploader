@@ -9,19 +9,26 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.lang.IllegalArgumentException
 import java.util.concurrent.CountDownLatch
 
 class VideoUploader(
     private val baseUri: String,
     private val executorUploader: UploaderRequestExecutor,
-    private val client: OkHttpClient
+    private val client: OkHttpClient,
+    private val chunkLength: Long = 1024L * 1024L * 50
 )  {
     companion object {
         private val boundary: String = "----WebKitFormBoundary" + System.currentTimeMillis()
-        var defaultChunkLength: Long = 5L
     }
 
-    private val chunkLength = (1024L * 1024L) * defaultChunkLength
+    init {
+        if(chunkLength < 1024L * 1024L * 5 || chunkLength > 1024L * 1024L * 128) {
+            throw IllegalArgumentException("Invalid chunk size: must be greater that 5MB and smaller than 128MB");
+        }
+    }
+
+   // private val chunkLength = 1024L * 1024L * 50
 
     fun uploadWithDelegatedToken(delegatedToken: String, file: File, callBack: CallBack) {
         return upload("$baseUri/upload?token=$delegatedToken", null,null, file, callBack)
