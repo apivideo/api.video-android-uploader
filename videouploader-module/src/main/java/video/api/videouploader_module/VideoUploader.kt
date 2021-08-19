@@ -21,7 +21,7 @@ class VideoUploader(
         private val boundary: String = "----WebKitFormBoundary" + System.currentTimeMillis()
     }
 
-    private val userAgent = "api.video uploader (android; v:0.0.6; )"
+    private val userAgent = "api.video uploader (android; v:0.0.7; )"
 
     init {
         if(chunkLength < 1024L * 1024L * 5 || chunkLength > 1024L * 1024L * 128) {

@@ -9,7 +9,7 @@ On build.gradle add the following code in dependencies:
 ```xml
 dependencies {
     ...
-    implementation 'video.api:android-video-uploader:0.0.6' // add this line
+    implementation 'video.api:android-video-uploader:0.0.7' // add this line
 }
 ```
 ### Or import with a local aar
