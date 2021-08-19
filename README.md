@@ -9,7 +9,7 @@ On build.gradle add the following code in dependencies:
 ```xml
 dependencies {
     ...
-    implementation 'video.api:android-video-uploader:0.0.6' // add this line
+    implementation 'video.api:android-video-uploader:0.0.7' // add this line
 }
 ```
 ### Or import with a local aar
@@ -39,5 +39,4 @@ Copyright (c) 2021 api.video
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [rtmp-rtsp-stream-client-java]: <https://github.com/pedroSG94/rtmp-rtsp-stream-client-java>
    [Issues]: <https://github.com/apivideo/android-video-uploader/issues>
