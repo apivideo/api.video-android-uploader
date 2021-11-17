@@ -283,23 +283,23 @@ paths:
       x-readme:
         code-samples:
         - language: go
-          code: "//install the Go API client\n//go get github.com/apivideo/go-api-client\n\
+          code: "//install the Go API client\n//go get github.com/apivideo/api.video-go-client\n\
             \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
-            \    apivideosdk \"github.com/apivideo/go-api-client\"\n)\n\nfunc main()\
-            \ {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_TOKEN\").Build()\n\
-            \    // if you rather like to use the sandbox environment:\n    // client\
-            \ := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\").Build()\n\
-            \n      videoId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" \n    // string | Enter\
-            \ the videoId you want to use to upload your video.\n      file := os.NewFile(1234,\
-            \ \"some_file\") \n    // *os.File | The path to the video you would like\
-            \ to upload. The path must be local. If you want to use a video from an\
-            \ online source, you must use the \\\\\\\"/videos\\\\\\\" endpoint and\
-            \ add the \\\\\\\"source\\\\\\\" parameter when you create a new video.\n\
-            \    \n    \n      res, err := client.Videos.UploadFile(videoId, file)\n\
-            \    \n      // you can also use a Reader instead of a File:\n      //\
-            \ client.Videos.Upload(videoId, fileName, fileReader, fileSize)\n    \n\
-            \      if err != nil {\n          fmt.Fprintf(os.Stderr, \"Error when\
-            \ calling `Videos.Upload``: %v\\n\", err)\n      }\n      // response\
+            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
+            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_TOKEN\"\
+            ).Build()\n    // if you rather like to use the sandbox environment:\n\
+            \    // client := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\"\
+            ).Build()\n\n      videoId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" \n    // string\
+            \ | Enter the videoId you want to use to upload your video.\n      file\
+            \ := os.NewFile(1234, \"some_file\") \n    // *os.File | The path to the\
+            \ video you would like to upload. The path must be local. If you want\
+            \ to use a video from an online source, you must use the \\\\\\\"/videos\\\
+            \\\\\" endpoint and add the \\\\\\\"source\\\\\\\" parameter when you\
+            \ create a new video.\n    \n    \n      res, err := client.Videos.UploadFile(videoId,\
+            \ file)\n    \n      // you can also use a Reader instead of a File:\n\
+            \      // client.Videos.Upload(videoId, fileName, fileReader, fileSize)\n\
+            \    \n      if err != nil {\n          fmt.Fprintf(os.Stderr, \"Error\
+            \ when calling `Videos.Upload``: %v\\n\", err)\n      }\n      // response\
             \ from `Upload`: Video\n      fmt.Fprintf(os.Stdout, \"Response from `Videos.Upload`:\
             \ %v\\n\", res)\n    }\n      }\n"
         - language: node
@@ -375,7 +375,7 @@ paths:
         - language: java
           code: |
             //dependency addition instructions
-            //https://github.com/apivideo/java-api-client
+            //https://github.com/apivideo/api.video-java-client
             // Import classes:
             import video.api.client.ApiVideoClient;
             import video.api.client.api.ApiException;
