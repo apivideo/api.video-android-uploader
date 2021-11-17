@@ -1,3 +1,2 @@
-include ':videouploader-module'
-include ':app'
-rootProject.name = "app"
+rootProject.name = "android-video-uploader"
+include ":example"
