@@ -6,12 +6,12 @@
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <version>0.1.0</version>
-    <url>https://github.com/apivideo/android-video-uploader</url>
+    <url>https://github.com/apivideo/api.video-android-uploader</url>
     <description>api.video Android API video uploader</description>
     <scm>
-        <connection>scm:git:git://github.com/apivideo/android-video-uploader.git</connection>
-        <developerConnection>scm:git:ssh://github.com:apivideo/android-video-uploader.git</developerConnection>
-        <url>https://github.com/apivideo/android-video-uploader</url>
+        <connection>scm:git:git://github.com/apivideo/api.video-android-uploader.git</connection>
+        <developerConnection>scm:git:ssh://github.com:apivideo/api.video-android-uploader.git</developerConnection>
+        <url>https://github.com/apivideo/api.video-android-uploader</url>
     </scm>
 
     <licenses>
