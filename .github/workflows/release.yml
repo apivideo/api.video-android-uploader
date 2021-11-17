@@ -1,21 +1,27 @@
-name: Release package to Maven Central Repository
+name: Release Android package to Maven Central Repository
 on:
   release:
     types: [created]
 jobs:
-  release:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy to maven
-        run: | 
-          echo $GPG_KEYRING_FILE_CONTENT | base64 --decode > videouploader-module/secring.gpg
-          sed -i -e "s,signing.keyId=,signing.keyId=$GPG_KEY_ID,g" gradle.properties
-          sed -i -e "s,signing.password=,signing.password=$GPG_PASSWORD,g" gradle.properties
-          sed -i -e "s,signing.secretKeyRingFile=,signing.secretKeyRingFile=secring.gpg,g" gradle.properties
-          cat gradle.properties
-          ./gradlew build uploadArchive -PNEXUS_USERNAME=${{ secrets.OSSRH_USERNAME }} -PNEXUS_PASSWORD="${{ secrets.OSSRH_PASSWORD }}"
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: Install gpg secret key
+        run: |
+          cat <(echo -e "${{ secrets.GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
+      - name: Publish to Central Repository
         env:
-          GPG_KEYRING_FILE_CONTENT: "${{ secrets.GPG_KEYRING_FILE_CONTENT }}"
-          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-          GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+        run: |
+          mvn --no-transfer-progress --batch-mode -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}" deploy
