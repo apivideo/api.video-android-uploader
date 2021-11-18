@@ -16,7 +16,7 @@
   - [Code sample](#code-sample)
 - [Documentation](#documentation)
   - [API Endpoints](#api-endpoints)
-    - [VideosApi](#VideosApi)
+    - [VideosApi](#videosapi)
   - [Models](#models)
   - [Authorization](#documentation-for-authorization)
     - [API token](#api-token)
