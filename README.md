@@ -14,6 +14,7 @@
     - [Gradle users](#gradle-users)
     - [Others](#others)
   - [Code sample](#code-sample)
+  - [Permissions](#permissions)
 - [Documentation](#documentation)
   - [API Endpoints](#api-endpoints)
     - [VideosApi](#videosapi)
@@ -47,7 +48,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>video.api</groupId>
   <artifactId>android-video-uploader</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +58,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "video.api:android-video-uploader:0.1.0"
+implementation "video.api:android-video-uploader:0.1.1"
 ```
 
 ### Others
@@ -70,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/android-video-uploader-0.1.0.jar`
+* `target/android-video-uploader-0.1.1.jar`
 * `target/lib/*.jar`
 
 ## Code sample
@@ -98,12 +99,15 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         
-        // "YOUR_API_TOKEN" is only required for upload (not for uploadWithUploadToken)
-        val videoApi = VideosApi(ApiClient("YOUR_API_TOKEN", Environment.PRODUCTION))
+        // If you want to upload a video with an upload token (uploadWithUploadToken):
+        val videoApi = VideosApi()
         // if you rather like to use the sandbox environment:
-        // val videoApi = VideosApi(ApiClient("YOUR_API_TOKEN", Environment.SANDBOX))
-        // if your rather like to use video token:
-        // val videoApi = VideosApi(ApiClient(Environment.PRODUCTION))
+        // val videoApi = VideosApi(Environment.SANDBOX)
+        // If you rather like to upload with your "YOUR_API_TOKEN" (upload)
+        // val videoApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION.basePath)
+        // if you rather like to use the sandbox environment:
+        // val videoApi = VideosApi("YOUR_API_TOKEN", Environment.SANDBOX.basePath)
+
         
         val myVideoFile = File("my-video.mp4")
 
@@ -112,9 +116,9 @@ class MainActivity : AppCompatActivity() {
          */
         executor.execute {
             try {
-                video = videoApi.upload("MY_VIDEO_ID", myVideoFile)
-                // if your rather like to use video token:
-                // video = videoApi.uploadWithUploadToken("MY_VIDEO_TOKEN", myVideoFile)
+                video = videoApi.uploadWithUploadToken("MY_VIDEO_TOKEN", myVideoFile)
+                // if your rather like to use your API key:
+                // video = videoApi.upload("MY_VIDEO_ID", myVideoFile)
                 Log.i("Example", "$video")
             } catch (e: ApiException) {
                 Log.e("Example", "Exception when calling VideoApi")
@@ -128,9 +132,21 @@ class MainActivity : AppCompatActivity() {
 
 ```
 
-## Example
+### Example
 
 An example that demonstrates how to use the API is provided in folder `example/`.
+
+## Permissions
+
+You have to add the following permissions in your `AndroidManifest.xml`:
+
+```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+<!-- Application requires android.permission.READ_EXTERNAL_STORAGE to upload videos` -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+``` 
+
+Your application also has to dynamically request the `android.permission.READ_EXTERNAL_STORAGE` permission to upload videos.
 
 # Documentation
 
@@ -144,7 +160,7 @@ All URIs are relative to *https://ws.api.video*
 
 #### Retrieve an instance of VideosApi:
 ```kotlin
-val videosApi = VideosApi(ApiClient("YOUR_API_TOKEN", Environment.PRODUCTION))
+val videosApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION)
 ```
 
 
@@ -180,14 +196,14 @@ Method | HTTP request | Description
 Most endpoints required to be authenticated using the API token mechanism described in our [documentation](https://docs.api.video/reference#authentication).
 The access token generation mechanism is automatically handled by the client. All you have to do is provide an API token when instantiating the ApiVideoClient:
 ```kotlin
-val videosApi = VideosApi(ApiClient("YOUR_API_TOKEN", Environment.PRODUCTION))
+val videosApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION)
 ```
 
 ### Public endpoints
 
 Some endpoints don't require authentication. These one can be called with a client instantiated without API token:
 ```kotlin
-val videosApi = VideosApi(ApiClient(Environment.PRODUCTION))
+val videosApi = VideosApi()
 ```
 
 ## Recommendation
