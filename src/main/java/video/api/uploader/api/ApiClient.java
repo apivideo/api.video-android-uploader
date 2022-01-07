@@ -118,7 +118,7 @@ public class ApiClient {
     private void init() {
         verifyingSsl = true;
         json = new JSON();
-        setUserAgent("api.video uploader (android; v:0.2.1; )");
+        setUserAgent("api.video uploader (android; v:0.2.2; )");
     }
 
     /**
