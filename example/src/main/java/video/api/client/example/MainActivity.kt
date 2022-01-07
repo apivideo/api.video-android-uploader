@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity() {
                 ApiClient(basePath)
             }.apply {
                 writeTimeout = 60000 // 1 min
+                uploadChunkSize = 5 * 1024 * 1024
             }
             val videoApi = VideosApi(apiClient)
 
