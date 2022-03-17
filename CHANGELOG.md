@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [0.2.5] - 2022-03-17
+- Fix metadata query param in GET /videos
+
 ## [0.2.4] - 2022-03-10
 - Add Origin identification headers
 
