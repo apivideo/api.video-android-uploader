@@ -118,7 +118,7 @@ public class ApiClient {
     private void init() {
         verifyingSsl = true;
         json = new JSON();
-        addDefaultHeader("AV-Origin-Client", "android-uploader:0.2.4");
+        addDefaultHeader("AV-Origin-Client", "android-uploader:0.2.5");
     }
 
     public void setApplicationName(String applicationName) {
@@ -469,8 +469,8 @@ public class ApiClient {
             return params;
         }
 
-        if (value instanceof HashMap) {
-            HashMap map = (HashMap) value;
+        if (value instanceof Map) {
+            Map map = (Map) value;
             map.forEach((k, v) -> {
                 if (k != null)
                     params.add(new Pair(name + "[" + k + "]", v == null ? null : v.toString()));
