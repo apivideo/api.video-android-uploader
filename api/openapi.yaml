@@ -81,6 +81,10 @@ paths:
           code: |
             //With the api.video API clients, authentication is taken care of with each client created.
             // You get to skip this step!
+        - language: swift
+          code: |
+            // With the api.video API clients, authentication is taken care of with each client created.
+            // You get to skip this step!
       x-contentType: application/json
       x-accepts: application/json
   /auth/refresh:
@@ -153,6 +157,10 @@ paths:
         - language: csharp
           code: |
             //With the api.video API clients, authentication is taken care of with each client created.
+            // You get to skip this step!
+        - language: swift
+          code: |
+            // With the api.video API clients, authentication is taken care of with each client created.
             // You get to skip this step!
       x-contentType: application/json
       x-accepts: application/json
@@ -256,7 +264,7 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 4665-07-14T23:36:18.598+00:00
+                    publishedAt: 4665-07-14T23:36:18.598Z
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -314,44 +322,59 @@ paths:
       summary: Upload a video
       tags:
       - Videos
+      x-client-description:
+        default: "To upload a video to the videoId you created. You can only upload\
+          \ your video to the videoId once.\n\nWe offer 2 types of upload: \n* Regular\
+          \ upload \n* Progressive upload\nThe latter allows you to split a video\
+          \ source into X chunks and send those chunks independently (concurrently\
+          \ or sequentially). The 2 main goals for our users are to\n  * allow the\
+          \ upload of video sources > 200 MiB (200 MiB = the max. allowed file size\
+          \ for regular upload)\n  * allow to send a video source \"progressively\"\
+          , i.e., before before knowing the total size of the video.\n  Once all chunks\
+          \ have been sent, they are reaggregated to one source file. The video source\
+          \ is considered as \"completely sent\" when the \"last\" chunk is sent (i.e.,\
+          \ the chunk that \"completes\" the upload).\n"
       x-client-action: upload
       x-client-chunk-upload: true
       x-readme:
         code-samples:
         - language: go
           code: "//install the Go API client\n//go get github.com/apivideo/api.video-go-client\n\
-            \npackage main\n\nimport (\n    \\\"context\\\"\n    \\\"fmt\\\"\n   \
-            \ \\\"os\\\"\n    apivideosdk \\\"github.com/apivideo/api.video-go-client\\\
-            \"\n)\n\nfunc main() {\n    client := apivideosdk.ClientBuilder(\\\"YOUR_API_TOKEN\\\
-            \").Build()\n    // if you rather like to use the sandbox environment:\n\
-            \    // client := apivideosdk.SandboxClientBuilder(\\\"YOU_SANDBOX_API_TOKEN\\\
-            \").Build()\n\n      videoId := \\\"vi4k0jvEUuaTdRAEjQ4Jfrgz\\\" \n  \
-            \  // string | Enter the videoId you want to use to upload your video.\n\
-            \      file := os.NewFile(1234, \\\"some_file\\\") \n    // *os.File |\
-            \ The path to the video you would like to upload. The path must be local.\
-            \ If you want to use a video from an online source, you must use the \\\
-            \\\\\\\\\\\\\"/videos\\\\\\\\\\\\\\\" endpoint and add the \\\\\\\\\\\\\
-            \\\"source\\\\\\\\\\\\\\\" parameter when you create a new video.\n  \
-            \  \n    \n      res, err := client.Videos.UploadFile(videoId, file)\n\
-            \    \n      // you can also use a Reader instead of a File:\n      //\
-            \ client.Videos.Upload(videoId, fileName, fileReader, fileSize)\n    \n\
-            \      if err != nil {\n          fmt.Fprintf(os.Stderr, \\\"Error when\
-            \ calling `Videos.Upload``: %v\\\n\\\", err)\n      }\n      // response\
-            \ from `Upload`: Video\n      fmt.Fprintf(os.Stdout, \\\"Response from\
-            \ `Videos.Upload`: %v\\\n\\\", res)\n    }\n      }\n"
+            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
+            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
+            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_TOKEN\"\
+            ).Build()\n    // if you rather like to use the sandbox environment:\n\
+            \    // client := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\"\
+            ).Build()\n\n      videoId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" \n    // string\
+            \ | Enter the videoId you want to use to upload your video.\n      file\
+            \ := os.NewFile(1234, \"some_file\") \n    // *os.File | The path to the\
+            \ video you would like to upload. The path must be local. If you want\
+            \ to use a video from an online source, you must use the \"/videos\" endpoint\
+            \ and add the \"source\" parameter when you create a new video.\n    \n\
+            \    \n      res, err := client.Videos.UploadFile(videoId, file)\n   \
+            \ \n      // you can also use a Reader instead of a File:\n      // client.Videos.Upload(videoId,\
+            \ fileName, fileReader, fileSize)\n    \n      if err != nil {\n     \
+            \     fmt.Fprintf(os.Stderr, \"Error when calling `Videos.Upload``: %v\\\
+            \n\", err)\n      }\n      // response from `Upload`: Video\n      fmt.Fprintf(os.Stdout,\
+            \ \"Response from `Videos.Upload`: %v\\\n\", res)\n    }\n      }\n"
         - language: node
-          code: "//install the module with npm or yarn\n//npm install @api.video/nodejs-client\
-            \ --save\n//yarn add @api.video/nodejs-client\n(async () => {\n    try\
-            \ {\n      const client = new ApiVideoClient({ apiKey: \\\"YOUR_API_TOKEN\\\
-            \" });\n      \n      const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter\
-            \ the videoId you want to use to upload your video.\n      const file\
-            \ = 'BINARY_DATA_HERE'; // The path to the video you would like to upload.\
+          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#upload\n\
+            \n// instantiate the client\nconst client = new ApiVideoClient({ apiKey:\
+            \ \"YOUR_API_TOKEN\" });\n\nconst videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz';\
+            \ // Enter the videoId you want to use to upload your video.\nconst file\
+            \ = './my-video.mp4'; // The path to the video you would like to upload.\
             \ The path must be local. If you want to use a video from an online source,\
-            \ you must use the \\\\\\\\\\\\\\\"/videos\\\\\\\\\\\\\\\" endpoint and\
-            \ add the \\\\\\\\\\\\\\\"source\\\\\\\\\\\\\\\" parameter when you create\
-            \ a new video.\n      \n      // Video\n      const result = await client.videos.upload(videoId,\
-            \ file);\n      console.log(result);\n    } catch (e) {\n        console.error(e);\n\
-            \    }\n})();\n"
+            \ you must use the \"/videos\" endpoint and add the \"source\" parameter\
+            \ when you create a new video.\n      \nconst video = await client.videos.upload(videoId,\
+            \ file);\n\n// if needed you can define an upload progress listener:\n\
+            const video2 = await client.videos.upload(videoId, file, (event) => {\n\
+            \  console.log(\"uploadedBytes: \" + event.uploadedBytes);\n  console.log(\"\
+            totalBytes: \" + event.totalBytes);\n  console.log(\"chunksCount: \" +\
+            \ event.chunksCount);\n  console.log(\"currentChunk: \" + event.currentChunk);\n\
+            \  console.log(\"currentChunkTotalBytes: \" + event.currentChunkTotalBytes);\n\
+            \  console.log(\"currentChunkUploadedBytes: \" + event.currentChunkUploadedBytes);\n\
+            });"
         - language: php
           code: |
             <?php
@@ -400,7 +423,7 @@ paths:
                 # Create an instance of the API class
                 api_instance = videos_api.VideosApi(api_client)
                 video_id = "vi4k0jvEUuaTdRAEjQ4Jfrgz" # str | Enter the videoId you want to use to upload your video.
-                file = open('/path/to/file', 'rb') # file_type | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\"/videos\\\" endpoint and add the \\\"source\\\" parameter when you create a new video.
+                file = open('/path/to/file', 'rb') # file_type | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
 
                 # example passing only required values which don't have defaults set
                 try:
@@ -429,7 +452,7 @@ paths:
                 VideosApi apiInstance = client.videos();
 
                 String videoId = "vi4k0jvEUuaTdRAEjQ4Jfrgz"; // Enter the videoId you want to use to upload your video.
-                File file = new File("/path/to/file"); // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\"/videos\\\" endpoint and add the \\\"source\\\" parameter when you create a new video.
+                File file = new File("/path/to/file"); // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
 
                 try {
                   Video result = apiInstance.upload(videoId, file);
@@ -463,7 +486,7 @@ paths:
                         var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                         var videoId = vi4k0jvEUuaTdRAEjQ4Jfrgz;  // string | Enter the videoId you want to use to upload your video.
-                        var file = BINARY_DATA_HERE;  // System.IO.Stream | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\"/videos\\\" endpoint and add the \\\"source\\\" parameter when you create a new video.
+                        var file = BINARY_DATA_HERE;  // System.IO.Stream | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
                         var apiVideosInstance = apiInstance.Videos();
                         try
                         {
@@ -585,7 +608,10 @@ paths:
       tags:
       - Videos
       x-client-description:
-        default: ""
+        default: This method allows you to send a video using an upload token. Upload
+          tokens are especially useful when the upload is done from the client side.
+          If you want to upload a video from your server-side application, you'd better
+          use the [standard upload method](#upload).
       x-client-action: uploadWithUploadToken
       x-client-chunk-upload: true
       x-readme:
@@ -596,10 +622,19 @@ paths:
             \ is a great place to look for uploading videos with the delegated token.\n\
             //We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).\n"
         - language: node
-          code: "//The upload will happen on the front end, and not on the backend\
-            \ code.  \n//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader)\
-            \ is a great place to look for uploading videos with the delegated token.\n\
-            //We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).\n"
+          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#uploadWithUploadToken\n\
+            \n// NOTE: Upload tokens are especially useful when the upload is done\
+            \ from the client side.\n// The following example show how to do it from\
+            \ the backend, but you should rather use the standard upload method in\
+            \ this case.\n\n// instantiate the client\nconst client = new ApiVideoClient({\
+            \ apiKey: \"YOUR_API_TOKEN\" });\n\nconst token = 'to4k0jvEUuaTdRAEjQ4Jfrgz';\
+            \ // Enter the unique identifier for the token you want to use to upload\
+            \ a video.\nconst file = './my-video.mp4'; // The path to the video you\
+            \ would like to upload. The path must be local. If you want to use a video\
+            \ from an online source, you must use the \"/videos\" endpoint and add\
+            \ the \"source\" parameter when you create a new video.\n      \nconst\
+            \ video = await client.videos.uploadWithUploadToken(token, file);\n"
         - language: python
           code: "#The upload will happen on the front end, and not on the backend\
             \ code.  \n#Our [JavaScript uploader(https://docs.api.video/docs/video-uploader)\
@@ -741,12 +776,12 @@ components:
         publishedAt:
           description: The date and time the API created the video. Date and time
             are provided using ISO-8601 UTC format.
-          example: 2019-12-16T08:25:51+00:00
+          example: 2019-12-16T08:25:51.000Z
           type: string
         updatedAt:
           description: The date and time the video was updated. Date and time are
             provided using ISO-8601 UTC format.
-          example: 2019-12-16T08:25:51+00:10
+          example: 2019-12-16T08:15:51Z
           format: date-time
           type: string
         tags:
