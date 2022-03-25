@@ -234,28 +234,11 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token When given a token, anyone can upload a file to the URI
-     * &#x60;https://ws.api.video/upload?token&#x3D;&lt;tokenId&gt;&#x60;. Example with cURL: &#x60;&#x60;&#x60;curl $
-     * curl --request POST --url &#39;https://ws.api.video/upload?token&#x3D;toXXX&#39; --header &#39;content-type:
-     * multipart/form-data&#39; -F file&#x3D;@video.mp4 &#x60;&#x60;&#x60; Or in an HTML form, with a little JavaScript
-     * to convert the form into JSON: &#x60;&#x60;&#x60;html &lt;!--form for user interaction--&gt; &lt;form
-     * name&#x3D;\&quot;videoUploadForm\&quot; &gt; &lt;label for&#x3D;video&gt;Video:&lt;/label&gt; &lt;input
-     * type&#x3D;file name&#x3D;source/&gt;&lt;br/&gt; &lt;input value&#x3D;\&quot;Submit\&quot;
-     * type&#x3D;\&quot;submit\&quot;&gt; &lt;/form&gt; &lt;div&gt;&lt;/div&gt; &lt;!--JS takes the form data uses
-     * FormData to turn the response into JSON. then uses POST to upload the video file. Update the token parameter in
-     * the url to your upload token. --&gt; &lt;script&gt; var form &#x3D;
-     * document.forms.namedItem(\&quot;videoUploadForm\&quot;); form.addEventListener(&#39;submit&#39;, function(ev) {
-     * ev.preventDefault(); var oOutput &#x3D; document.querySelector(\&quot;div\&quot;), oData &#x3D; new
-     * FormData(form); var oReq &#x3D; new XMLHttpRequest(); oReq.open(\&quot;POST\&quot;,
-     * \&quot;https://ws.api.video/upload?token&#x3D;toXXX\&quot;, true); oReq.send(oData); oReq.onload &#x3D;
-     * function(oEvent) { if (oReq.status &#x3D;&#x3D;201) { oOutput.innerHTML &#x3D; \&quot;Your video is
-     * uploaded!&lt;br/&gt;\&quot; + oReq.response; } else { oOutput.innerHTML &#x3D; \&quot;Error \&quot; + oReq.status
-     * + \&quot; occurred when trying to upload your file.&lt;br /&gt;\&quot;; } }; }, false); &lt;/script&gt;
-     * &#x60;&#x60;&#x60; ### Dealing with large files You can upload large files on api.video with &lt;a
-     * href&#x3D;&#39;https://docs.api.video/reference/post_videos-videoid-source&#39;&gt;Progressive Upload&lt;/a&gt;.
-     * Alternatively, if you want to use regular upload, we have created a &lt;a
-     * href&#x3D;&#39;https://api.video/blog/tutorials/uploading-large-files-with-javascript&#39;&gt;tutorial&lt;/a&gt;
-     * to walk through the steps required.
+     * Upload with an upload token
+     *
+     * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
+     * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
+     * use the [standard upload method](#upload).
      * 
      * @param token
      *            The unique identifier for the token you want to use to upload a video. (required)
@@ -292,28 +275,11 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token When given a token, anyone can upload a file to the URI
-     * &#x60;https://ws.api.video/upload?token&#x3D;&lt;tokenId&gt;&#x60;. Example with cURL: &#x60;&#x60;&#x60;curl $
-     * curl --request POST --url &#39;https://ws.api.video/upload?token&#x3D;toXXX&#39; --header &#39;content-type:
-     * multipart/form-data&#39; -F file&#x3D;@video.mp4 &#x60;&#x60;&#x60; Or in an HTML form, with a little JavaScript
-     * to convert the form into JSON: &#x60;&#x60;&#x60;html &lt;!--form for user interaction--&gt; &lt;form
-     * name&#x3D;\&quot;videoUploadForm\&quot; &gt; &lt;label for&#x3D;video&gt;Video:&lt;/label&gt; &lt;input
-     * type&#x3D;file name&#x3D;source/&gt;&lt;br/&gt; &lt;input value&#x3D;\&quot;Submit\&quot;
-     * type&#x3D;\&quot;submit\&quot;&gt; &lt;/form&gt; &lt;div&gt;&lt;/div&gt; &lt;!--JS takes the form data uses
-     * FormData to turn the response into JSON. then uses POST to upload the video file. Update the token parameter in
-     * the url to your upload token. --&gt; &lt;script&gt; var form &#x3D;
-     * document.forms.namedItem(\&quot;videoUploadForm\&quot;); form.addEventListener(&#39;submit&#39;, function(ev) {
-     * ev.preventDefault(); var oOutput &#x3D; document.querySelector(\&quot;div\&quot;), oData &#x3D; new
-     * FormData(form); var oReq &#x3D; new XMLHttpRequest(); oReq.open(\&quot;POST\&quot;,
-     * \&quot;https://ws.api.video/upload?token&#x3D;toXXX\&quot;, true); oReq.send(oData); oReq.onload &#x3D;
-     * function(oEvent) { if (oReq.status &#x3D;&#x3D;201) { oOutput.innerHTML &#x3D; \&quot;Your video is
-     * uploaded!&lt;br/&gt;\&quot; + oReq.response; } else { oOutput.innerHTML &#x3D; \&quot;Error \&quot; + oReq.status
-     * + \&quot; occurred when trying to upload your file.&lt;br /&gt;\&quot;; } }; }, false); &lt;/script&gt;
-     * &#x60;&#x60;&#x60; ### Dealing with large files You can upload large files on api.video with &lt;a
-     * href&#x3D;&#39;https://docs.api.video/reference/post_videos-videoid-source&#39;&gt;Progressive Upload&lt;/a&gt;.
-     * Alternatively, if you want to use regular upload, we have created a &lt;a
-     * href&#x3D;&#39;https://api.video/blog/tutorials/uploading-large-files-with-javascript&#39;&gt;tutorial&lt;/a&gt;
-     * to walk through the steps required.
+     * Upload with an upload token
+     *
+     * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
+     * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
+     * use the [standard upload method](#upload).
      * 
      * @param token
      *            The unique identifier for the token you want to use to upload a video. (required)
@@ -353,28 +319,11 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token When given a token, anyone can upload a file to the URI
-     * &#x60;https://ws.api.video/upload?token&#x3D;&lt;tokenId&gt;&#x60;. Example with cURL: &#x60;&#x60;&#x60;curl $
-     * curl --request POST --url &#39;https://ws.api.video/upload?token&#x3D;toXXX&#39; --header &#39;content-type:
-     * multipart/form-data&#39; -F file&#x3D;@video.mp4 &#x60;&#x60;&#x60; Or in an HTML form, with a little JavaScript
-     * to convert the form into JSON: &#x60;&#x60;&#x60;html &lt;!--form for user interaction--&gt; &lt;form
-     * name&#x3D;\&quot;videoUploadForm\&quot; &gt; &lt;label for&#x3D;video&gt;Video:&lt;/label&gt; &lt;input
-     * type&#x3D;file name&#x3D;source/&gt;&lt;br/&gt; &lt;input value&#x3D;\&quot;Submit\&quot;
-     * type&#x3D;\&quot;submit\&quot;&gt; &lt;/form&gt; &lt;div&gt;&lt;/div&gt; &lt;!--JS takes the form data uses
-     * FormData to turn the response into JSON. then uses POST to upload the video file. Update the token parameter in
-     * the url to your upload token. --&gt; &lt;script&gt; var form &#x3D;
-     * document.forms.namedItem(\&quot;videoUploadForm\&quot;); form.addEventListener(&#39;submit&#39;, function(ev) {
-     * ev.preventDefault(); var oOutput &#x3D; document.querySelector(\&quot;div\&quot;), oData &#x3D; new
-     * FormData(form); var oReq &#x3D; new XMLHttpRequest(); oReq.open(\&quot;POST\&quot;,
-     * \&quot;https://ws.api.video/upload?token&#x3D;toXXX\&quot;, true); oReq.send(oData); oReq.onload &#x3D;
-     * function(oEvent) { if (oReq.status &#x3D;&#x3D;201) { oOutput.innerHTML &#x3D; \&quot;Your video is
-     * uploaded!&lt;br/&gt;\&quot; + oReq.response; } else { oOutput.innerHTML &#x3D; \&quot;Error \&quot; + oReq.status
-     * + \&quot; occurred when trying to upload your file.&lt;br /&gt;\&quot;; } }; }, false); &lt;/script&gt;
-     * &#x60;&#x60;&#x60; ### Dealing with large files You can upload large files on api.video with &lt;a
-     * href&#x3D;&#39;https://docs.api.video/reference/post_videos-videoid-source&#39;&gt;Progressive Upload&lt;/a&gt;.
-     * Alternatively, if you want to use regular upload, we have created a &lt;a
-     * href&#x3D;&#39;https://api.video/blog/tutorials/uploading-large-files-with-javascript&#39;&gt;tutorial&lt;/a&gt;
-     * to walk through the steps required.
+     * Upload with an upload token
+     *
+     * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
+     * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
+     * use the [standard upload method](#upload).
      * 
      * @param token
      *            The unique identifier for the token you want to use to upload a video. (required)
@@ -468,28 +417,11 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token When given a token, anyone can upload a file to the URI
-     * &#x60;https://ws.api.video/upload?token&#x3D;&lt;tokenId&gt;&#x60;. Example with cURL: &#x60;&#x60;&#x60;curl $
-     * curl --request POST --url &#39;https://ws.api.video/upload?token&#x3D;toXXX&#39; --header &#39;content-type:
-     * multipart/form-data&#39; -F file&#x3D;@video.mp4 &#x60;&#x60;&#x60; Or in an HTML form, with a little JavaScript
-     * to convert the form into JSON: &#x60;&#x60;&#x60;html &lt;!--form for user interaction--&gt; &lt;form
-     * name&#x3D;\&quot;videoUploadForm\&quot; &gt; &lt;label for&#x3D;video&gt;Video:&lt;/label&gt; &lt;input
-     * type&#x3D;file name&#x3D;source/&gt;&lt;br/&gt; &lt;input value&#x3D;\&quot;Submit\&quot;
-     * type&#x3D;\&quot;submit\&quot;&gt; &lt;/form&gt; &lt;div&gt;&lt;/div&gt; &lt;!--JS takes the form data uses
-     * FormData to turn the response into JSON. then uses POST to upload the video file. Update the token parameter in
-     * the url to your upload token. --&gt; &lt;script&gt; var form &#x3D;
-     * document.forms.namedItem(\&quot;videoUploadForm\&quot;); form.addEventListener(&#39;submit&#39;, function(ev) {
-     * ev.preventDefault(); var oOutput &#x3D; document.querySelector(\&quot;div\&quot;), oData &#x3D; new
-     * FormData(form); var oReq &#x3D; new XMLHttpRequest(); oReq.open(\&quot;POST\&quot;,
-     * \&quot;https://ws.api.video/upload?token&#x3D;toXXX\&quot;, true); oReq.send(oData); oReq.onload &#x3D;
-     * function(oEvent) { if (oReq.status &#x3D;&#x3D;201) { oOutput.innerHTML &#x3D; \&quot;Your video is
-     * uploaded!&lt;br/&gt;\&quot; + oReq.response; } else { oOutput.innerHTML &#x3D; \&quot;Error \&quot; + oReq.status
-     * + \&quot; occurred when trying to upload your file.&lt;br /&gt;\&quot;; } }; }, false); &lt;/script&gt;
-     * &#x60;&#x60;&#x60; ### Dealing with large files You can upload large files on api.video with &lt;a
-     * href&#x3D;&#39;https://docs.api.video/reference/post_videos-videoid-source&#39;&gt;Progressive Upload&lt;/a&gt;.
-     * Alternatively, if you want to use regular upload, we have created a &lt;a
-     * href&#x3D;&#39;https://api.video/blog/tutorials/uploading-large-files-with-javascript&#39;&gt;tutorial&lt;/a&gt;
-     * to walk through the steps required.
+     * Upload with an upload token
+     *
+     * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
+     * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
+     * use the [standard upload method](#upload).
      * 
      * @param token
      *            The unique identifier for the token you want to use to upload a video. (required)
@@ -737,18 +669,17 @@ public class VideosApi {
     }
 
     /**
-     * Upload a video To upload a video to the videoId you created. Replace {videoId} with the id you&#39;d like to use,
-     * {access_token} with your token, and /path/to/video.mp4 with the path to the video you&#39;d like to upload. You
-     * can only upload your video to the videoId once. We offer 2 types of upload: * Regular upload * Progressive upload
-     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
-     * sequentially). The 2 main goals for our users are to * allow the upload of video sources &gt; 200 MiB (200 MiB
-     * &#x3D; the max. allowed file size for regular upload) * allow to send a video source \&quot;progressively\&quot;,
-     * i.e., before before knowing the total size of the video. Once all chunks have been sent, they are reaggregated to
-     * one source file. The video source is considered as \&quot;completely sent\&quot; when the \&quot;last\&quot;
-     * chunk is sent (i.e., the chunk that \&quot;completes\&quot; the upload). &#x60;&#x60;&#x60;bash curl
-     * https://ws.api.video/videos/{videoId}/source \\ -H &#39;Authorization: Bearer {access_token}&#39; \\ -F
-     * file&#x3D;@/path/to/video.mp4 &#x60;&#x60;&#x60; Tutorials using [video
-     * upload](https://api.video/blog/endpoints/video-upload).
+     * Upload a video
+     *
+     * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+     * 
+     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
+     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
+     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
+     * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
+     * the upload).
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
@@ -792,18 +723,17 @@ public class VideosApi {
     }
 
     /**
-     * Upload a video To upload a video to the videoId you created. Replace {videoId} with the id you&#39;d like to use,
-     * {access_token} with your token, and /path/to/video.mp4 with the path to the video you&#39;d like to upload. You
-     * can only upload your video to the videoId once. We offer 2 types of upload: * Regular upload * Progressive upload
-     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
-     * sequentially). The 2 main goals for our users are to * allow the upload of video sources &gt; 200 MiB (200 MiB
-     * &#x3D; the max. allowed file size for regular upload) * allow to send a video source \&quot;progressively\&quot;,
-     * i.e., before before knowing the total size of the video. Once all chunks have been sent, they are reaggregated to
-     * one source file. The video source is considered as \&quot;completely sent\&quot; when the \&quot;last\&quot;
-     * chunk is sent (i.e., the chunk that \&quot;completes\&quot; the upload). &#x60;&#x60;&#x60;bash curl
-     * https://ws.api.video/videos/{videoId}/source \\ -H &#39;Authorization: Bearer {access_token}&#39; \\ -F
-     * file&#x3D;@/path/to/video.mp4 &#x60;&#x60;&#x60; Tutorials using [video
-     * upload](https://api.video/blog/endpoints/video-upload).
+     * Upload a video
+     *
+     * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+     * 
+     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
+     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
+     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
+     * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
+     * the upload).
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
@@ -849,18 +779,17 @@ public class VideosApi {
     }
 
     /**
-     * Upload a video To upload a video to the videoId you created. Replace {videoId} with the id you&#39;d like to use,
-     * {access_token} with your token, and /path/to/video.mp4 with the path to the video you&#39;d like to upload. You
-     * can only upload your video to the videoId once. We offer 2 types of upload: * Regular upload * Progressive upload
-     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
-     * sequentially). The 2 main goals for our users are to * allow the upload of video sources &gt; 200 MiB (200 MiB
-     * &#x3D; the max. allowed file size for regular upload) * allow to send a video source \&quot;progressively\&quot;,
-     * i.e., before before knowing the total size of the video. Once all chunks have been sent, they are reaggregated to
-     * one source file. The video source is considered as \&quot;completely sent\&quot; when the \&quot;last\&quot;
-     * chunk is sent (i.e., the chunk that \&quot;completes\&quot; the upload). &#x60;&#x60;&#x60;bash curl
-     * https://ws.api.video/videos/{videoId}/source \\ -H &#39;Authorization: Bearer {access_token}&#39; \\ -F
-     * file&#x3D;@/path/to/video.mp4 &#x60;&#x60;&#x60; Tutorials using [video
-     * upload](https://api.video/blog/endpoints/video-upload).
+     * Upload a video
+     *
+     * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+     * 
+     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
+     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
+     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
+     * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
+     * the upload).
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
@@ -958,18 +887,17 @@ public class VideosApi {
     }
 
     /**
-     * Upload a video To upload a video to the videoId you created. Replace {videoId} with the id you&#39;d like to use,
-     * {access_token} with your token, and /path/to/video.mp4 with the path to the video you&#39;d like to upload. You
-     * can only upload your video to the videoId once. We offer 2 types of upload: * Regular upload * Progressive upload
-     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
-     * sequentially). The 2 main goals for our users are to * allow the upload of video sources &gt; 200 MiB (200 MiB
-     * &#x3D; the max. allowed file size for regular upload) * allow to send a video source \&quot;progressively\&quot;,
-     * i.e., before before knowing the total size of the video. Once all chunks have been sent, they are reaggregated to
-     * one source file. The video source is considered as \&quot;completely sent\&quot; when the \&quot;last\&quot;
-     * chunk is sent (i.e., the chunk that \&quot;completes\&quot; the upload). &#x60;&#x60;&#x60;bash curl
-     * https://ws.api.video/videos/{videoId}/source \\ -H &#39;Authorization: Bearer {access_token}&#39; \\ -F
-     * file&#x3D;@/path/to/video.mp4 &#x60;&#x60;&#x60; Tutorials using [video
-     * upload](https://api.video/blog/endpoints/video-upload).
+     * Upload a video
+     *
+     * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+     * 
+     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
+     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
+     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
+     * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
+     * the upload).
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
