@@ -342,17 +342,17 @@ paths:
           code: "//install the Go API client\n//go get github.com/apivideo/api.video-go-client\n\
             \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
             \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
-            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_TOKEN\"\
-            ).Build()\n    // if you rather like to use the sandbox environment:\n\
-            \    // client := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\"\
-            ).Build()\n\n      videoId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" \n    // string\
-            \ | Enter the videoId you want to use to upload your video.\n      file\
-            \ := os.NewFile(1234, \"some_file\") \n    // *os.File | The path to the\
-            \ video you would like to upload. The path must be local. If you want\
-            \ to use a video from an online source, you must use the \"/videos\" endpoint\
-            \ and add the \"source\" parameter when you create a new video.\n    \n\
-            \    \n      res, err := client.Videos.UploadFile(videoId, file)\n   \
-            \ \n      // you can also use a Reader instead of a File:\n      // client.Videos.Upload(videoId,\
+            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
+            \    // if you rather like to use the sandbox environment:\n    // client\
+            \ := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\").Build()\n\
+            \n      videoId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" \n    // string | Enter\
+            \ the videoId you want to use to upload your video.\n      file := os.NewFile(1234,\
+            \ \"some_file\") \n    // *os.File | The path to the video you would like\
+            \ to upload. The path must be local. If you want to use a video from an\
+            \ online source, you must use the \"/videos\" endpoint and add the \"\
+            source\" parameter when you create a new video.\n    \n    \n      res,\
+            \ err := client.Videos.UploadFile(videoId, file)\n    \n      // you can\
+            \ also use a Reader instead of a File:\n      // client.Videos.Upload(videoId,\
             \ fileName, fileReader, fileSize)\n    \n      if err != nil {\n     \
             \     fmt.Fprintf(os.Stderr, \"Error when calling `Videos.Upload``: %v\\\
             \n\", err)\n      }\n      // response from `Upload`: Video\n      fmt.Fprintf(os.Stdout,\
@@ -361,7 +361,7 @@ paths:
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
             \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#upload\n\
             \n// instantiate the client\nconst client = new ApiVideoClient({ apiKey:\
-            \ \"YOUR_API_TOKEN\" });\n\nconst videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz';\
+            \ \"YOUR_API_KEY\" });\n\nconst videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz';\
             \ // Enter the videoId you want to use to upload your video.\nconst file\
             \ = './my-video.mp4'; // The path to the video you would like to upload.\
             \ The path must be local. If you want to use a video from an online source,\
@@ -386,7 +386,7 @@ paths:
             $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
             $client = new \ApiVideo\Client(
                                 'https://sandbox.api.video',
-                                'YOUR_API_TOKEN',
+                                'YOUR_API_KEY',
                                 $httpClient
                             );
 
@@ -445,7 +445,7 @@ paths:
 
             public class Example {
               public static void main(String[] args) {
-                ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                 // if you rather like to use the sandbox environment:
                 // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -628,7 +628,7 @@ paths:
             \ from the client side.\n// The following example show how to do it from\
             \ the backend, but you should rather use the standard upload method in\
             \ this case.\n\n// instantiate the client\nconst client = new ApiVideoClient({\
-            \ apiKey: \"YOUR_API_TOKEN\" });\n\nconst token = 'to4k0jvEUuaTdRAEjQ4Jfrgz';\
+            \ apiKey: \"YOUR_API_KEY\" });\n\nconst token = 'to4k0jvEUuaTdRAEjQ4Jfrgz';\
             \ // Enter the unique identifier for the token you want to use to upload\
             \ a video.\nconst file = './my-video.mp4'; // The path to the video you\
             \ would like to upload. The path must be local. If you want to use a video\
