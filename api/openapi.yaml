@@ -339,12 +339,13 @@ paths:
       x-readme:
         code-samples:
         - language: go
-          code: "//install the Go API client\n//go get github.com/apivideo/api.video-go-client\n\
+          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#upload\n\
             \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
             \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
             \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
             \    // if you rather like to use the sandbox environment:\n    // client\
-            \ := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\").Build()\n\
+            \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
             \n      videoId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" \n    // string | Enter\
             \ the videoId you want to use to upload your video.\n      file := os.NewFile(1234,\
             \ \"some_file\") \n    // *os.File | The path to the video you would like\
@@ -360,13 +361,13 @@ paths:
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
             \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#upload\n\
-            \n// instantiate the client\nconst client = new ApiVideoClient({ apiKey:\
-            \ \"YOUR_API_KEY\" });\n\nconst videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz';\
-            \ // Enter the videoId you want to use to upload your video.\nconst file\
-            \ = './my-video.mp4'; // The path to the video you would like to upload.\
-            \ The path must be local. If you want to use a video from an online source,\
-            \ you must use the \"/videos\" endpoint and add the \"source\" parameter\
-            \ when you create a new video.\n      \nconst video = await client.videos.upload(videoId,\
+            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
+            const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter the videoId you want\
+            \ to use to upload your video.\nconst file = './my-video.mp4'; // The\
+            \ path to the video you would like to upload. The path must be local.\
+            \ If you want to use a video from an online source, you must use the \"\
+            /videos\" endpoint and add the \"source\" parameter when you create a\
+            \ new video.\n      \nconst video = await client.videos.upload(videoId,\
             \ file);\n\n// if needed you can define an upload progress listener:\n\
             const video2 = await client.videos.upload(videoId, file, (event) => {\n\
             \  console.log(\"uploadedBytes: \" + event.uploadedBytes);\n  console.log(\"\
@@ -377,6 +378,9 @@ paths:
             });"
         - language: php
           code: |
+            // First install the api client: "composer require api-video/php-api-client"
+            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#upload
+
             <?php
 
             use ApiVideo\Client\Model\VideoCreationPayload;
@@ -405,8 +409,8 @@ paths:
             $progressiveSession->uploadLastPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.c'));
         - language: python
           code: |
-            #install the api.video API client library
-            #pip install api.video
+            # First install the api client with "pip install api.video"
+            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#upload
 
             import apivideo
             from apivideo.api import videos_api
@@ -434,9 +438,9 @@ paths:
                     print("Exception when calling VideosApi->upload: %s\n" % e)
         - language: java
           code: |
-            //dependency addition instructions
-            //https://github.com/apivideo/api.video-java-client
-            // Import classes:
+            // First add the "video.api:java-api-client" maven dependency to your project
+            // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/VideosApi.md#upload
+
             import video.api.client.ApiVideoClient;
             import video.api.client.api.ApiException;
             import video.api.client.api.models.*;
@@ -447,7 +451,7 @@ paths:
               public static void main(String[] args) {
                 ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                 // if you rather like to use the sandbox environment:
-                // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
+                // ApiVideoClient client = new ApiVideoClient("YOUR_SANDBOX_API_KEY", ApiVideoClient.Environment.SANDBOX);
 
                 VideosApi apiInstance = client.videos();
 
@@ -468,8 +472,8 @@ paths:
             }
         - language: csharp
           code: |
-            //install via Nuget
-            //Install-Package ApiVideo
+            // First add the "ApiVideo" NuGet package to your project
+            // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#upload
 
             using System.Diagnostics;
             using ApiVideo.Client;
@@ -503,6 +507,11 @@ paths:
                     }
                 }
             }
+        - language: swift
+          code: |+
+            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
+            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#upload
+
       x-contentType: multipart/form-data
       x-accepts: application/json
   /upload:
@@ -617,39 +626,46 @@ paths:
       x-readme:
         code-samples:
         - language: go
-          code: "//The upload will happen on the front end, and not on the backend\
-            \ code.  \n//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader)\
-            \ is a great place to look for uploading videos with the delegated token.\n\
-            //We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).\n"
+          code: |+
+            // First install the go client with "go get github.com/apivideo/api.video-go-client"
+            // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
             \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#uploadWithUploadToken\n\
-            \n// NOTE: Upload tokens are especially useful when the upload is done\
-            \ from the client side.\n// The following example show how to do it from\
-            \ the backend, but you should rather use the standard upload method in\
-            \ this case.\n\n// instantiate the client\nconst client = new ApiVideoClient({\
-            \ apiKey: \"YOUR_API_KEY\" });\n\nconst token = 'to4k0jvEUuaTdRAEjQ4Jfrgz';\
-            \ // Enter the unique identifier for the token you want to use to upload\
-            \ a video.\nconst file = './my-video.mp4'; // The path to the video you\
-            \ would like to upload. The path must be local. If you want to use a video\
-            \ from an online source, you must use the \"/videos\" endpoint and add\
-            \ the \"source\" parameter when you create a new video.\n      \nconst\
-            \ video = await client.videos.uploadWithUploadToken(token, file);\n"
+            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
+            const token = 'to4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter the unique identifier\
+            \ for the token you want to use to upload a video.\nconst file = './my-video.mp4';\
+            \ // The path to the video you would like to upload. The path must be\
+            \ local. If you want to use a video from an online source, you must use\
+            \ the \"/videos\" endpoint and add the \"source\" parameter when you create\
+            \ a new video.\n      \nconst video = await client.videos.uploadWithUploadToken(token,\
+            \ file);\n"
         - language: python
-          code: "#The upload will happen on the front end, and not on the backend\
-            \ code.  \n#Our [JavaScript uploader(https://docs.api.video/docs/video-uploader)\
-            \ is a great place to look for uploading videos with the delegated token.\n\
-            #We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).\n"
+          code: |+
+            # First install the api client with "pip install api.video"
+            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+
         - language: java
-          code: "//The upload will happen on the front end, and not on the backend\
-            \ code.  \n//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader)\
-            \ is a great place to look for uploading videos with the delegated token.\n\
-            //We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).\n"
+          code: |+
+            // First add the "video.api:java-api-client" maven dependency to your project
+            // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+
         - language: csharp
-          code: "//The upload will happen on the front end, and not on the backend\
-            \ code.  \n//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader)\
-            \ is a great place to look for uploading videos with the delegated token.\n\
-            //We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).\n"
+          code: |+
+            // First add the "ApiVideo" NuGet package to your project
+            // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+
+        - language: php
+          code: |+
+            // First install the api client: "composer require api-video/php-api-client"
+            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#uploadWithUploadToken
+
+        - language: swift
+          code: |+
+            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
+            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
+
       x-contentType: multipart/form-data
       x-accepts: application/json
 components:

@@ -18,9 +18,36 @@ This method allows you to send a video using an upload token. Upload tokens are 
 
 ### Example
 ```java
-//The upload will happen on the front end, and not on the backend code.  
-//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader) is a great place to look for uploading videos with the delegated token.
-//We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).
+// Import classes:
+import video.api.client.ApiVideoClient;
+import video.api.uploader.api.ApiException;
+import video.api.uploader.api.models.*;
+import video.api.uploader.VideosApi;
+import java.util.*;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiVideoClient client = new ApiVideoClient();
+    // if you rather like to use the sandbox environment:
+    // ApiVideoClient client = new ApiVideoClient(ApiVideoClient.BasePaths.SANDBOX);
+
+    VideosApi apiInstance = client.videos();
+    
+    String token = "to1tcmSFHeYY5KzyhOqVKMKb"; // The unique identifier for the token you want to use to upload a video.
+    File file = new File("/path/to/file"); // The path to the video you want to upload.
+
+    try {
+      Video result = apiInstance.uploadWithUploadToken(token, file);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling VideosApi#uploadWithUploadToken");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getMessage());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
 ```
 
 ### Parameters
@@ -85,20 +112,26 @@ Upload a video
 
 To upload a video to the videoId you created. You can only upload your video to the videoId once.
 
+
+
 We offer 2 types of upload: 
+
 * Regular upload 
+
 * Progressive upload
+
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+
 
 
 ### Example
 ```java
-//dependency addition instructions
-//https://github.com/apivideo/api.video-java-client
-// Import classes:
 import video.api.client.ApiVideoClient;
 import video.api.client.api.ApiException;
 import video.api.client.api.models.*;
@@ -109,7 +142,7 @@ public class Example {
   public static void main(String[] args) {
     ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
+    // ApiVideoClient client = new ApiVideoClient("YOUR_SANDBOX_API_KEY", ApiVideoClient.Environment.SANDBOX);
 
     VideosApi apiInstance = client.videos();
 
@@ -171,7 +204,7 @@ Video result = session.uploadLastPart(new File("sample.mp4.partn"));
 
 ### Authorization
 
-[API token](../README.md#api-token)
+[API key](../README.md#api-key)
 
 ### HTTP request headers
 

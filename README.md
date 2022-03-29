@@ -20,7 +20,7 @@
     - [VideosApi](#videosapi)
   - [Models](#models)
   - [Authorization](#documentation-for-authorization)
-    - [API token](#api-token)
+    - [API key](#api-key)
     - [Public endpoints](#public-endpoints)
   - [Recommendation](#recommendation)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
@@ -103,10 +103,10 @@ class MainActivity : AppCompatActivity() {
         val videoApi = VideosApi()
         // if you rather like to use the sandbox environment:
         // val videoApi = VideosApi(Environment.SANDBOX)
-        // If you rather like to upload with your "YOUR_API_TOKEN" (upload)
-        // val videoApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION.basePath)
+        // If you rather like to upload with your "YOUR_API_KEY" (upload)
+        // val videoApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION.basePath)
         // if you rather like to use the sandbox environment:
-        // val videoApi = VideosApi("YOUR_API_TOKEN", Environment.SANDBOX.basePath)
+        // val videoApi = VideosApi("YOUR_API_KEY", Environment.SANDBOX.basePath)
 
         
         val myVideoFile = File("my-video.mp4")
@@ -160,7 +160,7 @@ All URIs are relative to *https://ws.api.video*
 
 #### Retrieve an instance of VideosApi:
 ```kotlin
-val videosApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION)
+val videosApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION)
 ```
 
 
@@ -191,17 +191,17 @@ Method | HTTP request | Description
 
 ## Documentation for Authorization
 
-### API token
+### API key
 
-Most endpoints required to be authenticated using the API token mechanism described in our [documentation](https://docs.api.video/reference#authentication).
-The access token generation mechanism is automatically handled by the client. All you have to do is provide an API token when instantiating the ApiVideoClient:
+Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
+The access token generation mechanism is automatically handled by the client. All you have to do is provide an API key when instantiating the ApiVideoClient:
 ```kotlin
-val videosApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION)
+val videosApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION)
 ```
 
 ### Public endpoints
 
-Some endpoints don't require authentication. These one can be called with a client instantiated without API token:
+Some endpoints don't require authentication. These one can be called with a client instantiated without API key:
 ```kotlin
 val videosApi = VideosApi()
 ```

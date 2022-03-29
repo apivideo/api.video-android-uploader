@@ -673,13 +673,25 @@ public class VideosApi {
      *
      * To upload a video to the videoId you created. You can only upload your video to the videoId once.
      * 
-     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
-     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
-     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
+     * 
+     * We offer 2 types of upload:
+     * 
+     * Regular upload
+     * 
+     * Progressive upload
+     * 
+     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
+     * sequentially). The 2 main goals for our users are to
+     * 
+     * allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
      * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * 
      * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
      * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
      * the upload).
+     * 
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
@@ -727,13 +739,25 @@ public class VideosApi {
      *
      * To upload a video to the videoId you created. You can only upload your video to the videoId once.
      * 
-     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
-     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
-     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
+     * 
+     * We offer 2 types of upload:
+     * 
+     * Regular upload
+     * 
+     * Progressive upload
+     * 
+     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
+     * sequentially). The 2 main goals for our users are to
+     * 
+     * allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
      * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * 
      * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
      * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
      * the upload).
+     * 
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
@@ -783,13 +807,25 @@ public class VideosApi {
      *
      * To upload a video to the videoId you created. You can only upload your video to the videoId once.
      * 
-     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
-     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
-     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
+     * 
+     * We offer 2 types of upload:
+     * 
+     * Regular upload
+     * 
+     * Progressive upload
+     * 
+     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
+     * sequentially). The 2 main goals for our users are to
+     * 
+     * allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
      * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * 
      * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
      * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
      * the upload).
+     * 
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
@@ -891,13 +927,25 @@ public class VideosApi {
      *
      * To upload a video to the videoId you created. You can only upload your video to the videoId once.
      * 
-     * We offer 2 types of upload: Regular upload Progressive upload The latter allows you to split a video source into
-     * X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are
-     * to allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
+     * 
+     * We offer 2 types of upload:
+     * 
+     * Regular upload
+     * 
+     * Progressive upload
+     * 
+     * The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or
+     * sequentially). The 2 main goals for our users are to
+     * 
+     * allow the upload of video sources &gt; 200 MiB (200 MiB &#x3D; the max. allowed file size for regular upload)
+     * 
      * allow to send a video source &quot;progressively&quot;, i.e., before before knowing the total size of the video.
+     * 
      * Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as
      * &quot;completely sent&quot; when the &quot;last&quot; chunk is sent (i.e., the chunk that &quot;completes&quot;
      * the upload).
+     * 
      * 
      * @param videoId
      *            Enter the videoId you want to use to upload your video. (required)
