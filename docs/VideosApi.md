@@ -4,105 +4,9 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**uploadWithUploadToken**](VideosApi.md#uploadWithUploadToken) | **POST** /upload | Upload with an upload token
 [**upload**](VideosApi.md#upload) | **POST** /videos/{videoId}/source | Upload a video
+[**uploadWithUploadToken**](VideosApi.md#uploadWithUploadToken) | **POST** /upload | Upload with an upload token
 
-
-<a name="uploadWithUploadToken"></a>
-# **uploadWithUploadToken**
-> Video uploadWithUploadToken(token, file)
-
-Upload with an upload token
-
-This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
-
-### Example
-```java
-// Import classes:
-import video.api.client.ApiVideoClient;
-import video.api.uploader.api.ApiException;
-import video.api.uploader.api.models.*;
-import video.api.uploader.VideosApi;
-import java.util.*;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiVideoClient client = new ApiVideoClient();
-    // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient(ApiVideoClient.BasePaths.SANDBOX);
-
-    VideosApi apiInstance = client.videos();
-    
-    String token = "to1tcmSFHeYY5KzyhOqVKMKb"; // The unique identifier for the token you want to use to upload a video.
-    File file = new File("/path/to/file"); // The path to the video you want to upload.
-
-    try {
-      Video result = apiInstance.uploadWithUploadToken(token, file);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling VideosApi#uploadWithUploadToken");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getMessage());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **token** | **String**| The unique identifier for the token you want to use to upload a video. |
- **file** | **File**| The path to the video you want to upload. |
-
-
-### Upload chunks
-
-Large files are broken into chunks for upload. You can control the size of the chunks using the `setUploadChunkSize()` of method of `ApiVideoClient` before uploading:
-
-```java
-apiVideoClient.setUploadChunkSize(50*1024*1024); // use 50MB chunks
-apiVideoClient.videos().uploadWithUploadToken(token, file);
-```
-
-### Progressive uploads
-
-Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
-The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
-
-```java
-String token = "to1tcmSFHeYY5KzyhOqVKMKb"; // The unique identifier for the token you want to use to upload a video.;
-
-UploadWithUploadTokenProgressiveSession session = apiVideoClient.createUploadWithUploadTokenProgressiveSession(token)
-
-session.uploadPart(new File("sample.mp4.part1"));
-session.uploadPart(new File("sample.mp4.part2"));
-// ...
-Video result = session.uploadLastPart(new File("sample.mp4.partn"));
-```
-
-
-### Return type
-
-
-[**Video**](Video.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Created |  -  |
-**400** | Bad Request |  -  |
 
 <a name="upload"></a>
 # **upload**
@@ -217,4 +121,100 @@ Video result = session.uploadLastPart(new File("sample.mp4.partn"));
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **404** | Not Found |  -  |
+
+<a name="uploadWithUploadToken"></a>
+# **uploadWithUploadToken**
+> Video uploadWithUploadToken(token, file)
+
+Upload with an upload token
+
+This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
+
+### Example
+```java
+// Import classes:
+import video.api.client.ApiVideoClient;
+import video.api.uploader.api.ApiException;
+import video.api.uploader.api.models.*;
+import video.api.uploader.VideosApi;
+import java.util.*;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiVideoClient client = new ApiVideoClient();
+    // if you rather like to use the sandbox environment:
+    // ApiVideoClient client = new ApiVideoClient(ApiVideoClient.BasePaths.SANDBOX);
+
+    VideosApi apiInstance = client.videos();
+    
+    String token = "to1tcmSFHeYY5KzyhOqVKMKb"; // The unique identifier for the token you want to use to upload a video.
+    File file = new File("/path/to/file"); // The path to the video you want to upload.
+
+    try {
+      Video result = apiInstance.uploadWithUploadToken(token, file);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling VideosApi#uploadWithUploadToken");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getMessage());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token** | **String**| The unique identifier for the token you want to use to upload a video. |
+ **file** | **File**| The path to the video you want to upload. |
+
+
+### Upload chunks
+
+Large files are broken into chunks for upload. You can control the size of the chunks using the `setUploadChunkSize()` of method of `ApiVideoClient` before uploading:
+
+```java
+apiVideoClient.setUploadChunkSize(50*1024*1024); // use 50MB chunks
+apiVideoClient.videos().uploadWithUploadToken(token, file);
+```
+
+### Progressive uploads
+
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
+
+```java
+String token = "to1tcmSFHeYY5KzyhOqVKMKb"; // The unique identifier for the token you want to use to upload a video.;
+
+UploadWithUploadTokenProgressiveSession session = apiVideoClient.createUploadWithUploadTokenProgressiveSession(token)
+
+session.uploadPart(new File("sample.mp4.part1"));
+session.uploadPart(new File("sample.mp4.part2"));
+// ...
+Video result = session.uploadLastPart(new File("sample.mp4.partn"));
+```
+
+
+### Return type
+
+
+[**Video**](Video.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
 

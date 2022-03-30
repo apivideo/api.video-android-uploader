@@ -377,36 +377,21 @@ paths:
             \  console.log(\"currentChunkUploadedBytes: \" + event.currentChunkUploadedBytes);\n\
             });"
         - language: php
-          code: |
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#upload
-
-            <?php
-
-            use ApiVideo\Client\Model\VideoCreationPayload;
-
-            require __DIR__ . '/vendor/autoload.php';
-
-            $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
-            $client = new \ApiVideo\Client(
-                                'https://sandbox.api.video',
-                                'YOUR_API_KEY',
-                                $httpClient
-                            );
-
-            // create a new video & upload a video file
-            $myVideo = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video'));
-            $client->videos()->upload($myVideo->getVideoId(), new SplFileObject(__DIR__ . '/../../../tests/resources/558k.mp4'));
-
-            // create a new video & upload a video file using progressive upload (the file is uploaded by parts)
-            $myVideo2 = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video (progressive upload)'));
-
-            $progressiveSession = $client->videos()->createUploadProgressiveSession($myVideo2->getVideoId());
-
-            $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.a'));
-            $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.b'));
-
-            $progressiveSession->uploadLastPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.c'));
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#upload\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n// create\
+            \ a new video & upload a video file\n$myVideo = $client->videos()->create((new\
+            \ \\ApiVideo\\Client\\Model\\VideoCreationPayload())->setTitle('Uploaded\
+            \ video'));\n$client->videos()->upload($myVideo->getVideoId(), new SplFileObject(__DIR__\
+            \ . '/558k.mp4'));\n\n// create a new video & upload a video file using\
+            \ progressive upload (the file is uploaded by parts)\n$myVideo2 = $client->videos()->create((new\
+            \ \\ApiVideo\\Client\\Model\\VideoCreationPayload())->setTitle('Uploaded\
+            \ video (progressive upload)'));\n\n$progressiveSession = $client->videos()->createUploadProgressiveSession($myVideo2->getVideoId());\n\
+            \n$progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/10m.mp4.part.a'));\n\
+            $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/10m.mp4.part.b'));\n\
+            \n$progressiveSession->uploadLastPart(new SplFileObject(__DIR__ . '/10m.mp4.part.c')); "
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -657,10 +642,17 @@ paths:
             // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
 
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#uploadWithUploadToken
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#pickThumbnail\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n \n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Unique identifier of the video you\
+            \ want to add a thumbnail to, where you use a section of your video as\
+            \ the thumbnail.\n\n$video = $client->videos()->pickThumbnail($videoId,\
+            \ (new \\ApiVideo\\Client\\Model\\VideoThumbnailPickPayload())\n    ->setTimecode(\"\
+            00:01:00.000\")); // Frame in video to be used as a placeholder before\
+            \ the video plays. "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
