@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [0.2.6] - 2022-04-21
+- Fix `video.publishedAt` type
+
 ## [0.2.5] - 2022-03-17
 - Fix metadata query param in GET /videos
 

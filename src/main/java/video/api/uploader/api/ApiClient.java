@@ -118,7 +118,7 @@ public class ApiClient {
     private void init() {
         verifyingSsl = true;
         json = new JSON();
-        addDefaultHeader("AV-Origin-Client", "android-uploader:0.2.5");
+        addDefaultHeader("AV-Origin-Client", "android-uploader:0.2.6");
     }
 
     public void setApplicationName(String applicationName) {
