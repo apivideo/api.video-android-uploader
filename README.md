@@ -48,7 +48,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>video.api</groupId>
   <artifactId>android-video-uploader</artifactId>
-  <version>0.2.5</version>
+  <version>0.2.6</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "video.api:android-video-uploader:0.2.5"
+implementation "video.api:android-video-uploader:0.2.6"
 ```
 
 ### Others
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/android-video-uploader-0.2.5.jar`
+* `target/android-video-uploader-0.2.6.jar`
 * `target/lib/*.jar`
 
 ## Code sample
