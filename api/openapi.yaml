@@ -274,7 +274,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Created
@@ -318,7 +318,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a video
       tags:
       - Videos
@@ -395,7 +395,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#upload
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#upload
 
             import apivideo
             from apivideo.api import videos_api
@@ -587,7 +587,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Created
@@ -629,7 +629,7 @@ paths:
         - language: python
           code: |+
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
 
         - language: java
           code: |+
@@ -962,7 +962,7 @@ components:
           type: string
         mp4:
           description: Available only if mp4Support is enabled. Raw mp4 url.
-          example: https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4
+          example: https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/source.mp4
           format: uri
           type: string
       title: VideoAssets
@@ -970,6 +970,9 @@ components:
   securitySchemes:
     bearerAuth:
       scheme: bearer
+      type: http
+    apiKey:
+      scheme: basic
       type: http
 x-client-base-paths:
   production: https://ws.api.video
