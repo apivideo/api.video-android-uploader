@@ -18,7 +18,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 def isReleaseBuild() {
-    return !"0.2.6".contains("SNAPSHOT")
+    return !"0.2.7".contains("SNAPSHOT")
 }
 
 def getReleaseRepositoryUrl() {
@@ -47,7 +47,7 @@ afterEvaluate { project ->
 
                 groupId = "video.api"
                 artifactId = "android-video-uploader"
-                version = "0.2.6"
+                version = "0.2.7"
 
                 pom {
                     name = "video.api:android-video-uploader"
