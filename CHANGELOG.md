@@ -1,6 +1,10 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [0.2.7] - 2022-05-17
+- Publicized chunk maxChunkSize
+- Add a progressive upload API to upload a specific part
+
 ## [0.2.6] - 2022-04-21
 - Fix `video.publishedAt` type
 
