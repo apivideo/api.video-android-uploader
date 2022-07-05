@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.0] - 2022-07-05
+- Add SDK origin header
+
 ## [0.2.7] - 2022-05-17
 - Publicized chunk maxChunkSize
 - Add a progressive upload API to upload a specific part
