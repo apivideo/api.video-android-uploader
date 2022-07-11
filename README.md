@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
 
         /**
          * Notice: you must not call API from the UI/main thread. Dispatch with Thread, Executors or Kotlin coroutines.
+         * Alternatively, most APIs comes with an asynchronous counterpart (`createAsync` for `create`).
          */
         executor.execute {
             try {
@@ -209,7 +210,7 @@ val videosApi = VideosApi()
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
-Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this.
+Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this. Alternatively, most APIs comes with an asynchronous counterpart (`createAsync` for `create`).
 
 ## Have you gotten use from this API client?
 
