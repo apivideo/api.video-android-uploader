@@ -48,7 +48,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>video.api</groupId>
   <artifactId>android-video-uploader</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "video.api:android-video-uploader:1.0.0"
+implementation "video.api:android-video-uploader:1.1.0"
 ```
 
 ### Others
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/android-video-uploader-1.0.0.jar`
+* `target/android-video-uploader-1.1.0.jar`
 * `target/lib/*.jar`
 
 ## Code sample
@@ -210,7 +210,7 @@ val videosApi = VideosApi()
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
-Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this. Alternatively, most APIs comes with an asynchronous counterpart (`createAsync` for `create`).
+Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this. Alternatively, APIs come with an asynchronous counterpart (`createAsync` for `create`) except the upload endpoint. In this case, you can use the customisable `UploadService` that manages background uploads and as well as notifications.
 
 ## Have you gotten use from this API client?
 
