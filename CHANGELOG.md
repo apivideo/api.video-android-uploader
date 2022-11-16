@@ -1,6 +1,10 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.1.2] - 2022-11-16
+- Fix the UploadService notification level
+- In example, add support for Android 13
+
 ## [1.1.1] - 2022-08-30
 - Improve the upload Service
 
