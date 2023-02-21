@@ -1,2 +1,3 @@
 rootProject.name = "android-video-uploader"
-include ":example"
+include ":examples:service"
+include ":examples:workmanager"

@@ -19,7 +19,6 @@ To get started, submit your API key in the body of your request. api.video retur
 ### Example
 ```java
 // Import classes:
-import video.api.client.ApiVideoClient;
 import video.api.uploader.api.ApiException;
 import video.api.uploader.api.models.*;
 import video.api.uploader.AuthenticationApi;
@@ -27,11 +26,9 @@ import java.util.*;
 
 public class Example {
   public static void main(String[] args) {
-    ApiVideoClient client = new ApiVideoClient();
+    AuthenticationApi apiInstance = authentication();
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient(ApiVideoClient.BasePaths.SANDBOX);
-
-    AuthenticationApi apiInstance = client.authentication();
+    //  AuthenticationApi apiInstance = new authentication(Environment.SANDBOX);
     
     AuthenticatePayload authenticatePayload = new AuthenticatePayload(); // 
     authenticatePayload.setApiKey("null"); // Your account API key. You can use your sandbox API key, or you can use your production API key.
@@ -88,7 +85,6 @@ Use the refresh endpoint with the refresh token you received when you first auth
 ### Example
 ```java
 // Import classes:
-import video.api.client.ApiVideoClient;
 import video.api.uploader.api.ApiException;
 import video.api.uploader.api.models.*;
 import video.api.uploader.AuthenticationApi;
@@ -96,11 +92,9 @@ import java.util.*;
 
 public class Example {
   public static void main(String[] args) {
-    ApiVideoClient client = new ApiVideoClient();
+    AuthenticationApi apiInstance = authentication();
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient(ApiVideoClient.BasePaths.SANDBOX);
-
-    AuthenticationApi apiInstance = client.authentication();
+    //  AuthenticationApi apiInstance = new authentication(Environment.SANDBOX);
     
     RefreshTokenPayload refreshTokenPayload = new RefreshTokenPayload(); // 
     refreshTokenPayload.setRefreshToken("null"); // The refresh token is either the first refresh token you received when you authenticated with the auth/api-key endpoint, or it&#39;s the refresh token from the last time you used the auth/refresh endpoint. Place this in the body of your request to obtain a new access token (which is valid for an hour) and a new refresh token.

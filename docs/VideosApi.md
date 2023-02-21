@@ -133,7 +133,6 @@ This method allows you to send a video using an upload token. Upload tokens are 
 ### Example
 ```java
 // Import classes:
-import video.api.client.ApiVideoClient;
 import video.api.uploader.api.ApiException;
 import video.api.uploader.api.models.*;
 import video.api.uploader.VideosApi;
@@ -141,11 +140,9 @@ import java.util.*;
 
 public class Example {
   public static void main(String[] args) {
-    ApiVideoClient client = new ApiVideoClient();
+    VideosApi apiInstance = videos();
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient(ApiVideoClient.BasePaths.SANDBOX);
-
-    VideosApi apiInstance = client.videos();
+    //  VideosApi apiInstance = new videos(Environment.SANDBOX);
     
     String token = "to1tcmSFHeYY5KzyhOqVKMKb"; // The unique identifier for the token you want to use to upload a video.
     File file = new File("/path/to/file"); // The path to the video you want to upload.
