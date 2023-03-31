@@ -183,7 +183,8 @@ object UploadWorkerHelper {
                     file
                 )
             )
-            .addTag(generateTag(videoId, token))
+            .addTag("uploader")
+            .addTag(getUploadTag(videoId, token))
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
     }
@@ -208,7 +209,7 @@ object UploadWorkerHelper {
      */
     @JvmStatic
     fun cancel(workManager: WorkManager, videoId: String) =
-        workManager.cancelAllWorkByTag(generateTag(videoId, null))
+        workManager.cancelAllWorkByTag(getUploadTag(videoId, null))
 
     /**
      * Cancels all works related to an upload token and possibly a video id that was added with [uploadWithUploadToken].
@@ -232,12 +233,24 @@ object UploadWorkerHelper {
      */
     @JvmStatic
     fun cancelWithUploadToken(workManager: WorkManager, token: String, videoId: String? = null) =
-        workManager.cancelAllWorkByTag(generateTag(videoId, token))
+        workManager.cancelAllWorkByTag(getUploadTag(videoId, token))
 
     private const val PREFIX_VIDEO_ID = "videoId="
     private const val PREFIX_TOKEN = "token="
-    private fun generateTag(videoId: String?, token: String?) =
-        "($PREFIX_VIDEO_ID$videoId, $PREFIX_TOKEN$token)"
+
+    /**
+     * Returns the tag used to identify works related to a video id or an upload token.
+     *
+     * @param videoId The video id
+     * @param token The upload token
+     * @return The tag
+     */
+    fun getUploadTag(videoId: String?, token: String?): String {
+        require((token != null) || (videoId != null)) {
+            "You must provide either a token or a videoId"
+        }
+        return "($PREFIX_VIDEO_ID$videoId, $PREFIX_TOKEN$token)"
+    }
 
     /**
      * Enqueues a work to upload a part of a file.
@@ -333,7 +346,8 @@ object UploadWorkerHelper {
                     isLastPart
                 )
             )
-            .addTag(generateSessionTag(sessionIndex))
+            .addTag("uploader")
+            .addTag(getProgressiveUploadSessionTag(session))
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
     }
@@ -359,11 +373,19 @@ object UploadWorkerHelper {
         workManager: WorkManager,
         session: IProgressiveUploadSession
     ) {
-        val sessionIndex = ProgressiveUploadSessionStore.indexOf(session)
-        workManager.cancelAllWorkByTag(generateSessionTag(sessionIndex))
+        workManager.cancelAllWorkByTag(getProgressiveUploadSessionTag(session))
     }
 
     private const val PREFIX_SESSION_ID = "sessionIndex="
-    private fun generateSessionTag(sessionIndex: Int) =
-        "($PREFIX_SESSION_ID$sessionIndex)"
+
+    /**
+     * Returns the tag used to identify works related to a progressive upload session.
+     *
+     * @param session The progressive upload session
+     * @return The tag
+     */
+    fun getProgressiveUploadSessionTag(session: IProgressiveUploadSession): String {
+        val sessionIndex = ProgressiveUploadSessionStore.indexOf(session)
+        return "($PREFIX_SESSION_ID$sessionIndex)"
+    }
 }
