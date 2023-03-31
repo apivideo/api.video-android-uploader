@@ -99,15 +99,17 @@ fun WorkManager.cancelWithUploadToken(token: String, videoId: String? = null) =
  * @param session The progressive upload session
  * @param file The file to upload
  * @param isLastPart True if this is the last part of the upload
+ * @param partId The part id. If null, the part id will be manage automatically.
  * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
  */
 fun WorkManager.uploadPart(
     session: IProgressiveUploadSession,
     file: File,
     isLastPart: Boolean,
+    partId: Int? = null,
     workerClass: Class<out ProgressiveUploadWorker> = ProgressiveUploadWorker::class.java
 ) =
-    UploadWorkerHelper.uploadPart(this, session, file, isLastPart, workerClass)
+    UploadWorkerHelper.uploadPart(this, session, file, isLastPart, partId, workerClass)
 
 /**
  * Extension functions for [WorkManager] to enqueue upload works for progressive upload.
@@ -115,15 +117,17 @@ fun WorkManager.uploadPart(
  * @param session The progressive upload session
  * @param filePath The path of the file to upload
  * @param isLastPart True if this is the last part of the upload
+ * @param partId The part id. If null, the part id will be manage automatically.
  * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
  */
 fun WorkManager.uploadPart(
     session: IProgressiveUploadSession,
     filePath: String,
     isLastPart: Boolean,
+    partId: Int? = null,
     workerClass: Class<out ProgressiveUploadWorker> = ProgressiveUploadWorker::class.java
 ) =
-    UploadWorkerHelper.uploadPart(this, session, File(filePath), isLastPart, workerClass)
+    UploadWorkerHelper.uploadPart(this, session, File(filePath), isLastPart, partId, workerClass)
 
 /**
  * Extension functions for [WorkManager] to cancel upload works that was added with [WorkManager.uploadPart].

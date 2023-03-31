@@ -259,18 +259,21 @@ object UploadWorkerHelper {
      * @param session The progressive upload session
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
+     * @param partId The part id. If null, the part id will be manage automatically.
      */
     @JvmStatic
     private fun uploadPart(
         context: Context,
         session: IProgressiveUploadSession,
         file: File,
-        isLastPart: Boolean
+        isLastPart: Boolean,
+        partId: Int? = null,
     ) = uploadPart(
         WorkManager.getInstance(context),
         session,
         file,
         isLastPart,
+        partId,
         ProgressiveUploadWorker::class.java
     )
 
@@ -281,6 +284,7 @@ object UploadWorkerHelper {
      * @param session The progressive upload session
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
+     * @param partId The part id. If null, the part id will be manage automatically.
      * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
      */
     @JvmStatic
@@ -289,8 +293,9 @@ object UploadWorkerHelper {
         session: IProgressiveUploadSession,
         file: File,
         isLastPart: Boolean,
+        partId: Int? = null,
         workerClass: Class<out ProgressiveUploadWorker>
-    ) = uploadPart(WorkManager.getInstance(context), session, file, isLastPart, workerClass)
+    ) = uploadPart(WorkManager.getInstance(context), session, file, isLastPart, partId, workerClass)
 
     /**
      * Enqueues a work to upload a part of a file.
@@ -299,18 +304,21 @@ object UploadWorkerHelper {
      * @param session The progressive upload session
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
+     * @param partId The part id. If null, the part id will be manage automatically.
      */
     @JvmStatic
     fun uploadPart(
         workManager: WorkManager,
         session: IProgressiveUploadSession,
         file: File,
-        isLastPart: Boolean
+        isLastPart: Boolean,
+        partId: Int? = null
     ) = uploadPart(
         workManager,
         session,
         file,
         isLastPart,
+        partId,
         ProgressiveUploadWorker::class.java
     )
 
@@ -321,6 +329,7 @@ object UploadWorkerHelper {
      * @param session The progressive upload session
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
+     * @param partId The part id. If null, the part id will be manage automatically.
      * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
      */
     @JvmStatic
@@ -329,6 +338,7 @@ object UploadWorkerHelper {
         session: IProgressiveUploadSession,
         file: File,
         isLastPart: Boolean,
+        partId: Int? = null,
         workerClass: Class<out ProgressiveUploadWorker>
     ): OperationWithRequest {
         val sessionIndex = ProgressiveUploadSessionStore.add(session)
@@ -343,10 +353,12 @@ object UploadWorkerHelper {
                 ProgressiveUploadWorker.createInputData(
                     sessionIndex,
                     file,
-                    isLastPart
+                    isLastPart,
+                    partId
                 )
             )
             .addTag("uploader")
+            .addTag("progressive")
             .addTag(getProgressiveUploadSessionTag(session))
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
