@@ -16,28 +16,32 @@ import java.io.File
  *
  * @param videoId The video id
  * @param file The file to upload
+ * @param tags The custom tags to add to identify the work
  * @param workerClass The worker class to use. Default is [UploadWorker].
  */
 fun WorkManager.upload(
     videoId: String,
     file: File,
+    tags: List<String> = emptyList(),
     workerClass: Class<out UploadWorker> = UploadWorker::class.java
 ) =
-    UploadWorkerHelper.upload(this, videoId, file, workerClass)
+    UploadWorkerHelper.upload(this, videoId, file, tags, workerClass)
 
 /**
  * Extension functions for [WorkManager] to enqueue upload works.
  *
  * @param videoId The video id
  * @param filePath The path of the file to upload
+ * @param tags The custom tags to add to identify the work
  * @param workerClass The worker class to use. Default is [UploadWorker].
  */
 fun WorkManager.upload(
     videoId: String,
     filePath: String,
+    tags: List<String> = emptyList(),
     workerClass: Class<out UploadWorker> = UploadWorker::class.java
 ) =
-    UploadWorkerHelper.upload(this, videoId, File(filePath), workerClass)
+    UploadWorkerHelper.upload(this, videoId, File(filePath), tags, workerClass)
 
 /**
  * Extension functions for [WorkManager] to enqueue upload works with upload token.
@@ -45,15 +49,17 @@ fun WorkManager.upload(
  * @param token The upload token
  * @param file The file to upload
  * @param videoId The video id. Can be null if the video is not created yet.
+ * @param tags The custom tags to add to identify the work
  * @param workerClass The worker class to use. Default is [UploadWorker].
  */
 fun WorkManager.uploadWithUploadToken(
     token: String,
     file: File,
     videoId: String? = null,
+    tags: List<String> = emptyList(),
     workerClass: Class<out UploadWorker> = UploadWorker::class.java
 ) =
-    UploadWorkerHelper.uploadWithUploadToken(this, token, file, videoId, workerClass)
+    UploadWorkerHelper.uploadWithUploadToken(this, token, file, videoId, tags, workerClass)
 
 /**
  * Extension functions for [WorkManager] to enqueue upload works with upload token.
@@ -61,12 +67,14 @@ fun WorkManager.uploadWithUploadToken(
  * @param token The upload token
  * @param filePath The path of the file to upload
  * @param videoId The video id. Can be null if the video is not created yet.
+ * @param tags The custom tags to add to identify the work
  * @param workerClass The worker class to use. Default is [UploadWorker].
  */
 fun WorkManager.uploadWithUploadToken(
     token: String,
     filePath: String,
     videoId: String? = null,
+    tags: List<String> = emptyList(),
     workerClass: Class<out UploadWorker> = UploadWorker::class.java
 ) =
     UploadWorkerHelper.uploadWithUploadToken(
@@ -74,6 +82,7 @@ fun WorkManager.uploadWithUploadToken(
         token,
         File(filePath),
         videoId,
+        tags,
         workerClass
     )
 
@@ -100,6 +109,7 @@ fun WorkManager.cancelWithUploadToken(token: String, videoId: String? = null) =
  * @param file The file to upload
  * @param isLastPart True if this is the last part of the upload
  * @param partId The part id. If null, the part id will be manage automatically.
+ * @param tags The custom tags to add to identify the work
  * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
  */
 fun WorkManager.uploadPart(
@@ -107,9 +117,10 @@ fun WorkManager.uploadPart(
     file: File,
     isLastPart: Boolean,
     partId: Int? = null,
+    tags: List<String> = emptyList(),
     workerClass: Class<out ProgressiveUploadWorker> = ProgressiveUploadWorker::class.java
 ) =
-    UploadWorkerHelper.uploadPart(this, session, file, isLastPart, partId, workerClass)
+    UploadWorkerHelper.uploadPart(this, session, file, isLastPart, partId, tags, workerClass)
 
 /**
  * Extension functions for [WorkManager] to enqueue upload works for progressive upload.
@@ -118,6 +129,7 @@ fun WorkManager.uploadPart(
  * @param filePath The path of the file to upload
  * @param isLastPart True if this is the last part of the upload
  * @param partId The part id. If null, the part id will be manage automatically.
+ * @param tags The custom tags to add to identify the work
  * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
  */
 fun WorkManager.uploadPart(
@@ -125,9 +137,18 @@ fun WorkManager.uploadPart(
     filePath: String,
     isLastPart: Boolean,
     partId: Int? = null,
+    tags: List<String> = emptyList(),
     workerClass: Class<out ProgressiveUploadWorker> = ProgressiveUploadWorker::class.java
 ) =
-    UploadWorkerHelper.uploadPart(this, session, File(filePath), isLastPart, partId, workerClass)
+    UploadWorkerHelper.uploadPart(
+        this,
+        session,
+        File(filePath),
+        isLastPart,
+        partId,
+        tags,
+        workerClass
+    )
 
 /**
  * Extension functions for [WorkManager] to cancel upload works that was added with [WorkManager.uploadPart].

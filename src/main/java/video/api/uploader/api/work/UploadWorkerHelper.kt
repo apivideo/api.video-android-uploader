@@ -22,14 +22,16 @@ object UploadWorkerHelper {
      * @param context The application context
      * @param videoId The video id
      * @param file The file to upload
+     * @param tags The custom tags to add to identify the work
      */
     @JvmStatic
     fun upload(
         context: Context,
         videoId: String,
         file: File,
+        tags: List<String> = emptyList()
     ) =
-        upload(WorkManager.getInstance(context), videoId, file)
+        upload(WorkManager.getInstance(context), videoId, file, tags)
 
     /**
      * Enqueues a work to upload a file.
@@ -37,6 +39,7 @@ object UploadWorkerHelper {
      * @param context The application context
      * @param videoId The video id
      * @param file The file to upload
+     * @param tags The custom tags to add to identify the work
      * @param workerClass The worker class to use. Default is [UploadWorker].
      */
     @JvmStatic
@@ -44,9 +47,10 @@ object UploadWorkerHelper {
         context: Context,
         videoId: String,
         file: File,
+        tags: List<String> = emptyList(),
         workerClass: Class<out UploadWorker> = UploadWorker::class.java
     ) =
-        upload(WorkManager.getInstance(context), videoId, file, workerClass)
+        upload(WorkManager.getInstance(context), videoId, file, tags, workerClass)
 
     /**
      * Enqueues a work to upload a file.
@@ -54,14 +58,16 @@ object UploadWorkerHelper {
      * @param workManager The WorkManager instance
      * @param videoId The video id
      * @param file The file to upload
+     * @param tags The custom tags to add to identify the work
      */
     @JvmStatic
     fun upload(
         workManager: WorkManager,
         videoId: String,
         file: File,
+        tags: List<String> = emptyList()
     ) =
-        upload(workManager, videoId, file, UploadWorker::class.java)
+        upload(workManager, videoId, file, tags, UploadWorker::class.java)
 
     /**
      * Enqueues a work to upload a file.
@@ -69,15 +75,17 @@ object UploadWorkerHelper {
      * @param workManager The WorkManager instance
      * @param videoId The video id
      * @param file The file to upload
+     * @param tags The custom tags to add to identify the work
      * @param workerClass The worker class to use. Default is [UploadWorker].
      */
     fun upload(
         workManager: WorkManager,
         videoId: String,
         file: File,
+        tags: List<String> = emptyList(),
         workerClass: Class<out UploadWorker>
     ) =
-        upload(workManager, file, null, videoId, workerClass)
+        upload(workManager, file, null, videoId, tags, workerClass)
 
     /**
      * Enqueues a work to upload a file with upload token.
@@ -86,6 +94,7 @@ object UploadWorkerHelper {
      * @param token The upload token
      * @param file The file to upload
      * @param videoId The video id. Can be null if the video is not created yet.
+     * @param tags The custom tags to add to identify the work
      */
     @JvmStatic
     fun uploadWithUploadToken(
@@ -93,11 +102,13 @@ object UploadWorkerHelper {
         token: String,
         file: File,
         videoId: String? = null,
+        tags: List<String> = emptyList()
     ) = uploadWithUploadToken(
         WorkManager.getInstance(context),
         token,
         file,
         videoId,
+        tags,
         UploadWorker::class.java
     )
 
@@ -109,6 +120,7 @@ object UploadWorkerHelper {
      * @param file The file to upload
      * @param videoId The video id. Can be null if the video is not created yet.
      * @param workerClass The worker class to use. Default is [UploadWorker].
+     * @param tags The custom tags to add to identify the work
      */
     @JvmStatic
     fun uploadWithUploadToken(
@@ -116,8 +128,16 @@ object UploadWorkerHelper {
         token: String,
         file: File,
         videoId: String? = null,
+        tags: List<String> = emptyList(),
         workerClass: Class<out UploadWorker>
-    ) = uploadWithUploadToken(WorkManager.getInstance(context), token, file, videoId, workerClass)
+    ) = uploadWithUploadToken(
+        WorkManager.getInstance(context),
+        token,
+        file,
+        videoId,
+        tags,
+        workerClass
+    )
 
     /**
      * Enqueues a work to upload a file with upload token.
@@ -126,6 +146,7 @@ object UploadWorkerHelper {
      * @param token The upload token
      * @param file The file to upload
      * @param videoId The video id. Can be null if the video is not created yet.
+     * @param tags The custom tags to add to identify the work
      */
     @JvmStatic
     fun uploadWithUploadToken(
@@ -133,11 +154,13 @@ object UploadWorkerHelper {
         token: String,
         file: File,
         videoId: String? = null,
+        tags: List<String> = emptyList()
     ) = uploadWithUploadToken(
         workManager,
         token,
         file,
         videoId,
+        tags,
         UploadWorker::class.java
     )
 
@@ -148,6 +171,7 @@ object UploadWorkerHelper {
      * @param token The upload token
      * @param file The file to upload
      * @param videoId The video id. Can be null if the video is not created yet.
+     * @param tags The custom tags to add to identify the work
      * @param workerClass The worker class to use. Default is [UploadWorker].
      */
     @JvmStatic
@@ -156,14 +180,16 @@ object UploadWorkerHelper {
         token: String,
         file: File,
         videoId: String? = null,
+        tags: List<String> = emptyList(),
         workerClass: Class<out UploadWorker>,
-    ) = upload(workManager, file, token, videoId, workerClass)
+    ) = upload(workManager, file, token, videoId, tags, workerClass)
 
     private fun upload(
         workManager: WorkManager,
         file: File,
         token: String? = null,
         videoId: String? = null,
+        tags: List<String> = emptyList(),
         workerClass: Class<out UploadWorker>
     ): OperationWithRequest {
         require((token != null) || (videoId != null)) {
@@ -185,6 +211,9 @@ object UploadWorkerHelper {
             )
             .addTag("uploader")
             .addTag(getUploadTag(videoId, token))
+            .apply {
+                tags.forEach { addTag(it) }
+            }
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
     }
@@ -260,6 +289,7 @@ object UploadWorkerHelper {
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
      * @param partId The part id. If null, the part id will be manage automatically.
+     * @param tags The custom tags to add to identify the work
      */
     @JvmStatic
     private fun uploadPart(
@@ -268,12 +298,14 @@ object UploadWorkerHelper {
         file: File,
         isLastPart: Boolean,
         partId: Int? = null,
+        tags: List<String> = emptyList(),
     ) = uploadPart(
         WorkManager.getInstance(context),
         session,
         file,
         isLastPart,
         partId,
+        tags,
         ProgressiveUploadWorker::class.java
     )
 
@@ -285,6 +317,7 @@ object UploadWorkerHelper {
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
      * @param partId The part id. If null, the part id will be manage automatically.
+     * @param tags The custom tags to add to identify the work
      * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
      */
     @JvmStatic
@@ -294,8 +327,17 @@ object UploadWorkerHelper {
         file: File,
         isLastPart: Boolean,
         partId: Int? = null,
+        tags: List<String> = emptyList(),
         workerClass: Class<out ProgressiveUploadWorker>
-    ) = uploadPart(WorkManager.getInstance(context), session, file, isLastPart, partId, workerClass)
+    ) = uploadPart(
+        WorkManager.getInstance(context),
+        session,
+        file,
+        isLastPart,
+        partId,
+        tags,
+        workerClass
+    )
 
     /**
      * Enqueues a work to upload a part of a file.
@@ -305,6 +347,7 @@ object UploadWorkerHelper {
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
      * @param partId The part id. If null, the part id will be manage automatically.
+     * @param tags The custom tags to add to identify the work
      */
     @JvmStatic
     fun uploadPart(
@@ -312,13 +355,15 @@ object UploadWorkerHelper {
         session: IProgressiveUploadSession,
         file: File,
         isLastPart: Boolean,
-        partId: Int? = null
+        partId: Int? = null,
+        tags: List<String> = emptyList()
     ) = uploadPart(
         workManager,
         session,
         file,
         isLastPart,
         partId,
+        tags,
         ProgressiveUploadWorker::class.java
     )
 
@@ -330,6 +375,7 @@ object UploadWorkerHelper {
      * @param file The file to upload
      * @param isLastPart True if this is the last part of the file
      * @param partId The part id. If null, the part id will be manage automatically.
+     * @param tags The custom tags to add to identify the work
      * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
      */
     @JvmStatic
@@ -339,6 +385,7 @@ object UploadWorkerHelper {
         file: File,
         isLastPart: Boolean,
         partId: Int? = null,
+        tags: List<String> = emptyList(),
         workerClass: Class<out ProgressiveUploadWorker>
     ): OperationWithRequest {
         val sessionIndex = ProgressiveUploadSessionStore.add(session)
@@ -360,6 +407,9 @@ object UploadWorkerHelper {
             .addTag("uploader")
             .addTag("progressive")
             .addTag(getProgressiveUploadSessionTag(session))
+            .apply {
+                tags.forEach { addTag(it) }
+            }
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
     }
