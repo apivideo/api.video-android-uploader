@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.2.2] - 2023-04-20
+- Add upload token and videoId in WorkManager tags
+
 ## [1.2.1] - 2023-04-04
 - Add custom tag for WorkManager
 - Fix tag for progressive upload in WorkManager
