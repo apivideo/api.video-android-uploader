@@ -14,8 +14,9 @@ paths:
   /auth/api-key:
     post:
       description: |-
-        To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
-        All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
+        Returns a bearer token that can be used to authenticate other endpoint.
+
+        You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
       operationId: POST_auth-api-key
       requestBody:
         content:
@@ -50,9 +51,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
-      summary: Advanced - Authenticate (1/2)
+      summary: Get Bearer Token
       tags:
-      - Authentication
+      - Advanced authentication
       x-client-action: authenticate
       x-client-hidden: true
       x-readme:
@@ -89,10 +90,10 @@ paths:
       x-accepts: application/json
   /auth/refresh:
     post:
-      description: "Use the refresh endpoint with the refresh token you received when\
-        \ you first authenticated using the api-key endpoint. Send the refresh token\
-        \ in the body of your request. The api.video API returns a new access token\
-        \ that is valid for one hour (3600 seconds) and a new refresh token. \n"
+      description: |-
+        Accepts the old bearer token and returns a new bearer token that can be used to authenticate other endpoint.
+
+        You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
       operationId: POST_auth-refresh
       requestBody:
         content:
@@ -127,9 +128,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
-      summary: Advanced - Refresh token (2/2)
+      summary: Refresh Bearer Token
       tags:
-      - Authentication
+      - Advanced authentication
       x-client-action: refresh
       x-client-hidden: true
       x-readme:
@@ -166,21 +167,7 @@ paths:
       x-accepts: application/json
   /videos/{videoId}/source:
     post:
-      description: "To upload a video to the videoId you created. Replace {videoId}\
-        \ with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4\
-        \ with the path to the video you'd like to upload. You can only upload your\
-        \ video to the videoId once.\nWe offer 2 types of upload: \n* Regular upload\
-        \ \n* Progressive upload\nThe latter allows you to split a video source into\
-        \ X chunks and send those chunks independently (concurrently or sequentially).\
-        \ The 2 main goals for our users are to\n  * allow the upload of video sources\
-        \ > 200 MiB (200 MiB = the max. allowed file size for regular upload)\n  *\
-        \ allow to send a video source \"progressively\", i.e., before before knowing\
-        \ the total size of the video.\n  Once all chunks have been sent, they are\
-        \ reaggregated to one source file. The video source is considered as \"completely\
-        \ sent\" when the \"last\" chunk is sent (i.e., the chunk that \"completes\"\
-        \ the upload).\n```bash\ncurl https://ws.api.video/videos/{videoId}/source\
-        \ \\\n  -H 'Authorization: Bearer {access_token}' \\\n  -F file=@/path/to/video.mp4\n\
-        \n  ```\nTutorials using [video upload](https://api.video/blog/endpoints/video-upload)."
+      description: Ingest a video from a source or file.
       operationId: POST_videos-videoId-source
       parameters:
       - description: Enter the videoId you want to use to upload your video.
@@ -192,39 +179,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: "Content-Range can be used if you want to split your file. You\
-          \ can do this by parts, or by chunk.\n* If you split your file by parts\
-          \ (recommended option), the `Content-Range` header value must match the\
-          \ following pattern: `part <part>/<total_parts>`:\n  * `<part>` is a positive\
-          \ integer representing the part number. The first sequential part number\
-          \ is always 1.\n  * `<total_parts>` is a positive integer representing the\
-          \ total parts of the video source. It can also be `*` if or as long as it\
-          \ is unknown. Technically, this value is required only one time and cannot\
-          \ differ in several requests.\n* If you split your file by bytes, bear in\
-          \ mind byte ranges are inclusive, meaning that bytes 0-5242879 represents\
-          \ the first 5,242,880 bytes in a file or object. Also, the Content-Range\
-          \ header value must match the following pattern: `bytes <from_byte>-<to_byte>/<total_bytes>`:\n\
-          \  * `<from_byte>` is a positive integer or 0. It represents the range start\
-          \ (aka lower bound), i.e., the first byte of the chunk compared to the total\
-          \ bytes composing the full video source. The first sequential range always\
-          \ starts at 0.\n  * `<to_byte>` is a positive integer representing the range\
-          \ end (aka upper bound), i.e., the last byte of the chunk compared to the\
-          \ total bytes composing the full video source.\n  * `<total_bytes>` is a\
-          \ positive integer representing the total bytes composing the full video\
-          \ source. It can also be `*` if or as long as it is unknown. Technically,\
-          \ this value is required only one time and cannot differ in several requests.\n\
-          * Ordering and chunk or part size\n  * The order in which the chunks are\
-          \ received on our side does not matter. \n    * Example: `part 3/*` then\
-          \ `part 2/*` then `part 1/3` works.\n  * The chunks can be sent concurrently.\
-          \ We have a lock mechanism to ensure they are still technically processed\
-          \ one by one to ensure the \"completion\" check behaves as expected.\n \
-          \ * The only chunk that can be smaller than our minimum allowed chunk size\
-          \ (5 MiB) is the last sequential one (i.e., the last sequential range for\
-          \ the \"byte-range\" system and the last part for the \"part\" system.\n\
-          \    * For instance, if your video is 10.5 MiB big, your last chunk would\
-          \ be 500 KiB, and that would work. \n    * Another example is if your video\
-          \ is 2 MiB big, then your first and last chunk will be 2MiB and that will\
-          \ work as well.\n"
+      - description: '`part <part>/<total_parts>` ; `bytes <from_byte>-<to_byte>/<total_bytes>`'
         example: bytes 209715200-419430399/524288000 OR part 2/3
         explode: false
         in: header
@@ -494,37 +449,14 @@ paths:
                 }
             }
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#upload
-
       x-contentType: multipart/form-data
       x-accepts: application/json
   /upload:
     post:
-      description: "When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.\n\
-        \nExample with cURL:\n\n```curl\n$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'\n\
-        \ --header 'content-type: multipart/form-data'\n -F file=@video.mp4\n```\n\
-        \nOr in an HTML form, with a little JavaScript to convert the form into JSON:\n\
-        ```html\n<!--form for user interaction-->\n<form name=\"videoUploadForm\"\
-        \ >\n  <label for=video>Video:</label>\n  <input type=file name=source/><br/>\n\
-        \  <input value=\"Submit\" type=\"submit\">\n</form>\n<div></div>\n<!--JS\
-        \ takes the form data \n    uses FormData to turn the response into JSON.\n\
-        \    then uses POST to upload the video file.\n    Update the token parameter\
-        \ in the url to your upload token.\n    -->\n<script>\n   var form = document.forms.namedItem(\"\
-        videoUploadForm\");\t\n   form.addEventListener('submit', function(ev) {\n\
-        \t ev.preventDefault();\n     var oOutput = document.querySelector(\"div\"\
-        ),\n         oData = new FormData(form);\n     var oReq = new XMLHttpRequest();\n\
-        \t \n     oReq.open(\"POST\", \"https://ws.api.video/upload?token=toXXX\"\
-        , true);\n     oReq.send(oData);\n\t oReq.onload = function(oEvent) {\n  \
-        \     if (oReq.status ==201) {\n         oOutput.innerHTML = \"Your video\
-        \ is uploaded!<br/>\"  + oReq.response;\n       } else {\n         oOutput.innerHTML\
-        \ = \"Error \" + oReq.status + \" occurred when trying to upload your file.<br\
-        \ \\/>\";\n       }\n     };\n   }, false);\t\n</script>\n```\n\n\n### Dealing\
-        \ with large files\n\nYou can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive\
-        \ Upload</a>. Alternatively, if you want to use regular upload, we have created\
-        \ a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a>\
-        \ to walk through the steps required."
+      description: Uploading a video with the delegated upload token.
       operationId: POST_upload
       parameters:
       - description: The unique identifier for the token you want to use to upload
@@ -599,7 +531,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security: []
-      summary: Upload with an upload token
+      summary: Upload with an delegated upload token
       tags:
       - Videos
       x-client-description:
@@ -612,10 +544,9 @@ paths:
       x-readme:
         code-samples:
         - language: go
-          code: |+
+          code: |
             // First install the go client with "go get github.com/apivideo/api.video-go-client"
             // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
             \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#uploadWithUploadToken\n\
@@ -628,20 +559,17 @@ paths:
             \ a new video.\n      \nconst video = await client.videos.uploadWithUploadToken(token,\
             \ file);\n"
         - language: python
-          code: |+
+          code: |
             # First install the api client with "pip install api.video"
             # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: java
-          code: |+
+          code: |
             // First add the "video.api:java-api-client" maven dependency to your project
             // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: csharp
-          code: |+
+          code: |
             // First add the "ApiVideo" NuGet package to your project
             // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: php
           code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
             \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#pickThumbnail\n\
@@ -655,10 +583,9 @@ paths:
             00:01:00.000\")); // Frame in video to be used as a placeholder before\
             \ the video plays. "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
-
       x-contentType: multipart/form-data
       x-accepts: application/json
 components:
@@ -975,6 +902,8 @@ components:
     apiKey:
       scheme: basic
       type: http
+x-stoplight:
+  id: ybzk39fiws46g
 x-client-base-paths:
   production: https://ws.api.video
   sandbox: https://sandbox.api.video

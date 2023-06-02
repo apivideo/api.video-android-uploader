@@ -181,7 +181,7 @@ val videosApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION)
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**upload**](docs/VideosApi.md#upload) | **POST** /videos/{videoId}/source | Upload a video
-[**uploadWithUploadToken**](docs/VideosApi.md#uploadWithUploadToken) | **POST** /upload | Upload with an upload token
+[**uploadWithUploadToken**](docs/VideosApi.md#uploadWithUploadToken) | **POST** /upload | Upload with an delegated upload token
 
 
 
