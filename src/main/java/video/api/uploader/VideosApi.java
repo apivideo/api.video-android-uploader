@@ -800,7 +800,7 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token
+     * Upload with an delegated upload token
      *
      * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
      * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
@@ -841,7 +841,7 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token
+     * Upload with an delegated upload token
      *
      * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
      * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
@@ -886,7 +886,7 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token
+     * Upload with an delegated upload token
      *
      * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
      * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
@@ -930,7 +930,7 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token
+     * Upload with an delegated upload token
      *
      * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
      * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better
@@ -1064,7 +1064,7 @@ public class VideosApi {
     }
 
     /**
-     * Upload with an upload token
+     * Upload with an delegated upload token
      *
      * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload
      * is done from the client side. If you want to upload a video from your server-side application, you&#39;d better

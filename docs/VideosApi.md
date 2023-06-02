@@ -5,7 +5,7 @@ All URIs are relative to *https://ws.api.video*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**upload**](VideosApi.md#upload) | **POST** /videos/{videoId}/source | Upload a video
-[**uploadWithUploadToken**](VideosApi.md#uploadWithUploadToken) | **POST** /upload | Upload with an upload token
+[**uploadWithUploadToken**](VideosApi.md#uploadWithUploadToken) | **POST** /upload | Upload with an delegated upload token
 
 
 <a name="upload"></a>
@@ -126,7 +126,7 @@ Video result = session.uploadLastPart(new File("sample.mp4.partn"));
 # **uploadWithUploadToken**
 > Video uploadWithUploadToken(token, file)
 
-Upload with an upload token
+Upload with an delegated upload token
 
 This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
 
