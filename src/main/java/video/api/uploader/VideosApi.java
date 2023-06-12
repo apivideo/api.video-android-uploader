@@ -13,19 +13,22 @@ package video.api.uploader;
 
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
 import java.io.IOException;
 
-import video.api.uploader.api.models.*;
-import video.api.uploader.api.upload.*;
-import video.api.uploader.api.*;
+import video.api.uploader.api.models.BadRequest;
+import java.io.File;
+import video.api.uploader.api.models.NotFound;
+import video.api.uploader.api.models.Video;
 
 import java.lang.reflect.Type;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import video.api.uploader.api.models.*;
+import video.api.uploader.api.upload.*;
+import video.api.uploader.api.*;
 
 public class VideosApi {
     private ApiClient localVarApiClient;
