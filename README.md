@@ -188,6 +188,7 @@ Method | HTTP request | Description
 ## Documentation for Models
 
  - [AccessToken](docs/AccessToken.md)
+ - [AdditionalBadRequestErrors](docs/AdditionalBadRequestErrors.md)
  - [AuthenticatePayload](docs/AuthenticatePayload.md)
  - [BadRequest](docs/BadRequest.md)
  - [Metadata](docs/Metadata.md)
