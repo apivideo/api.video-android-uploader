@@ -589,6 +589,30 @@ paths:
       x-contentType: multipart/form-data
       x-accepts: application/json
 components:
+  examples:
+    live-stream-response-example:
+      value:
+        liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
+        createdAt: 2020-07-29T10:45:35.000Z
+        updatedAt: 2020-07-29T10:45:35.000Z
+        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        restreams:
+        - name: YouTube
+          serverUrl: rtmp://youtube.broadcast.example.com
+          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        - name: Twitch
+          serverUrl: rtmp://twitch.broadcast.example.com
+          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        name: Live From New York
+        public: true
+        record: true
+        broadcasting: false
+        assets:
+          iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
+            width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
+          player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
+          hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
+          thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
   parameters:
     current-page:
       description: 'Choose the number of search results to return per page. Minimum
