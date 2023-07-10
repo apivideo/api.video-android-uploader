@@ -80,71 +80,33 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Kotlin code:
 
 ```kotlin
-import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import video.api.uploader.api.ApiException
-import video.api.uploader.api.models.*
-import java.io.File
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+// If you want to upload a video with an upload token (uploadWithUploadToken):
+VideosApiStore.initialize()
+// if you rather like to use the sandbox environment:
+// VideosApiStore.initialize(environment = Environment.SANDBOX)
+// If you rather like to upload with your "YOUR_API_KEY" (upload)
+// VideosApiStore.initialize("YOUR_API_KEY", Environment.PRODUCTION)
+// if you rather like to use the sandbox environment:
+// VideosApiStore.initialize("YOU_SANDBOX_API_KEY", Environment.SANDBOX)
 
-class MainActivity : AppCompatActivity() {
-    private val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+val myVideoFile = File("my-video.mp4")
 
-    override fun onResume() {
-        super.onResume()
-        
-        // If you want to upload a video with an upload token (uploadWithUploadToken):
-        val videoApi = VideosApi()
-        // if you rather like to use the sandbox environment:
-        // val videoApi = VideosApi(Environment.SANDBOX)
-        // If you rather like to upload with your "YOUR_API_KEY" (upload)
-        // val videoApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION.basePath)
-        // if you rather like to use the sandbox environment:
-        // val videoApi = VideosApi("YOUR_API_KEY", Environment.SANDBOX.basePath)
-
-        
-        val myVideoFile = File("my-video.mp4")
-
-        /**
-         * Notice: you must not call API from the UI/main thread. Dispatch with Thread, Executors or Kotlin coroutines.
-         * Alternatively, most APIs comes with an asynchronous counterpart (`createAsync` for `create`) except for the upload endpoint.
-         *
-         * To simplify upload, see [Upload options](#upload-options)
-         */
-        executor.execute {
-            try {
-                video = videoApi.uploadWithUploadToken("MY_VIDEO_TOKEN", myVideoFile)
-                // if your rather like to use your API key:
-                // video = videoApi.upload("MY_VIDEO_ID", myVideoFile)
-                Log.i("Example", "$video")
-            } catch (e: ApiException) {
-                Log.e("Example", "Exception when calling VideoApi")
-                e.message?.let {
-                    Log.e("Example", "Reason: ${it}")
-                }
-            }
-        }
-    }
-}
-
+val workManager = WorkManager.getInstance(context) // WorkManager comes from package "androidx.work:work-runtime"
+workManager.uploadWithUploadToken("MY_UPLOAD_TOKEN", myVideoFile) // Dispatch the upload with the WorkManager
+// if your rather like to use your API key:
+// workManager.upload("MY_VIDEO_ID", myVideoFile)
 ```
 
 ### Example
 
 Examples that demonstrate how to use the API is provided in folder `examples/`.
 
-## Upload options
+## Upload methods
 
-To upload a video, you have 3 differents options:
-* WorkManager: preferred option: Upload with Android WorkManager API. It supports progress notifications. Directly use, WorkManager extensions. See [example](examples/workmanager) for more details.
-* UploadService: Upload with an Android Service. It supports progress notifications. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](examples/service) for more details.
+To upload a video, you have 3 differents methods:
+* `WorkManager`: preferred method: Upload with Android WorkManager API. It supports progress notifications. Directly use, WorkManager extensions. See [example](examples/workmanager) for more details.
+* `UploadService`: Upload with an Android Service. It supports progress notifications. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](examples/service) for more details.
 * Direct call with `ApiClient`: Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this.
 
 ## Permissions
