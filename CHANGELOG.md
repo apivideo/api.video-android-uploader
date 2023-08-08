@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.2.3] - 2023-08-08
+- Fix upload notification resources name
+
 ## [1.2.2] - 2023-04-20
 - Add upload token and videoId in WorkManager tags
 
