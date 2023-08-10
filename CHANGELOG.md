@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.2.4] - 2023-08-10
+- Fix upload with upload token and video id when video is smaller than chunk size
+
 ## [1.2.3] - 2023-08-08
 - Fix upload notification resources name
 
