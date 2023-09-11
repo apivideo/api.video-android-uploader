@@ -36,22 +36,20 @@ The latter allows you to split a video source into X chunks and send those chunk
 
 ### Example
 ```java
-import video.api.client.ApiVideoClient;
-import video.api.client.api.ApiException;
-import video.api.client.api.models.*;
-import video.api.client.api.clients.VideosApi;
+// Import classes:
+import video.api.uploader.api.ApiException;
+import video.api.uploader.api.models.*;
+import video.api.uploader.VideosApi;
 import java.util.*;
 
 public class Example {
   public static void main(String[] args) {
-    ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
+    VideosApi apiInstance = new videos("YOUR_API_KEY");
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient("YOUR_SANDBOX_API_KEY", ApiVideoClient.Environment.SANDBOX);
-
-    VideosApi apiInstance = client.videos();
-
+    // VideosApi apiInstance = new videos("YOUR_SANDBOX_API_KEY", Environment.SANDBOX);
+    
     String videoId = "vi4k0jvEUuaTdRAEjQ4Jfrgz"; // Enter the videoId you want to use to upload your video.
-    File file = new File("/path/to/file"); // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
+    File file = new File("/path/to/file"); // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\"/videos\\\" endpoint and add the \\\"source\\\" parameter when you create a new video.
 
     try {
       Video result = apiInstance.upload(videoId, file);

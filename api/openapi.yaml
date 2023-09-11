@@ -56,7 +56,7 @@ paths:
       - Advanced authentication
       x-client-action: authenticate
       x-client-hidden: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -133,7 +133,7 @@ paths:
       - Advanced authentication
       x-client-action: refresh
       x-client-hidden: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -291,7 +291,7 @@ paths:
           \ the chunk that \"completes\" the upload).\n"
       x-client-action: upload
       x-client-chunk-upload: true
-      x-readme:
+      x-doctave:
         explorer-enabled: false
         code-samples:
         - language: go
@@ -541,7 +541,7 @@ paths:
           use the [standard upload method](#upload).
       x-client-action: uploadWithUploadToken
       x-client-chunk-upload: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -953,7 +953,7 @@ x-stoplight:
 x-client-base-paths:
   production: https://ws.api.video
   sandbox: https://sandbox.api.video
-x-readme:
+x-doctave:
   explorer-enabled: true
   proxy-enabled: true
   samples-enabled: true
