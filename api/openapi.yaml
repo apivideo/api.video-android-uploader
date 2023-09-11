@@ -605,7 +605,6 @@ components:
           streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
         name: Live From New York
         public: true
-        record: true
         broadcasting: false
         assets:
           iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
