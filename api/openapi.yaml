@@ -450,8 +450,8 @@ paths:
             }
         - language: swift
           code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#upload
+            // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+            // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#upload
       x-contentType: multipart/form-data
       x-accepts: application/json
   /upload:
@@ -584,8 +584,8 @@ paths:
             \ the video plays. "
         - language: swift
           code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
+            // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+            // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
       x-contentType: multipart/form-data
       x-accepts: application/json
 components:

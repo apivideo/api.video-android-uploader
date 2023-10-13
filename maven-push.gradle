@@ -52,7 +52,7 @@ afterEvaluate { project ->
                 pom {
                     name = "video.api:android-video-uploader"
                     packaging = "aar"
-                    description = "api.video Android API video uploader"
+                    description = "The official Android api.video uploader"
                     url = "https://github.com/apivideo/api.video-android-uploader"
 
                     scm {
