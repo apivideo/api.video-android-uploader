@@ -18,7 +18,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 def isReleaseBuild() {
-    return !"1.3.3".contains("SNAPSHOT")
+    return !"1.3.4".contains("SNAPSHOT")
 }
 
 def getReleaseRepositoryUrl() {
@@ -39,7 +39,17 @@ def getRepositoryPassword() {
     return hasProperty('OSSRH_PASSWORD') ? OSSRH_PASSWORD : System.getenv("OSSRH_PASSWORD")
 }
 
-afterEvaluate { project ->
+android {
+    publishing {
+        multipleVariants {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
+}
+
+afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
@@ -47,7 +57,7 @@ afterEvaluate { project ->
 
                 groupId = "video.api"
                 artifactId = "android-video-uploader"
-                version = "1.3.3"
+                version = "1.3.4"
 
                 pom {
                     name = "video.api:android-video-uploader"
