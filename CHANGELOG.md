@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.3.5] - 2024-03-21
+- Add missing proguard rules for gson and jackson
+
 ## [1.3.4] - 2024-01-08
 - Upgrade dependencies, gradle and Kotlin
 
