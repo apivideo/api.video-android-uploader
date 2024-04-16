@@ -18,6 +18,7 @@ import java.io.IOException;
 import video.api.uploader.api.models.BadRequest;
 import java.io.File;
 import video.api.uploader.api.models.NotFound;
+import video.api.uploader.api.models.TooManyRequests;
 import video.api.uploader.api.models.Video;
 
 import java.lang.reflect.Type;
@@ -123,17 +124,42 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>404</td>
      *                        <td>Not Found</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -296,17 +322,42 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>404</td>
      *                        <td>Not Found</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -364,17 +415,42 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>404</td>
      *                        <td>Not Found</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -430,17 +506,42 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>404</td>
      *                        <td>Not Found</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -578,17 +679,42 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>404</td>
      *                        <td>Not Found</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -669,12 +795,32 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -833,12 +979,32 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -876,12 +1042,32 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -921,12 +1107,32 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -963,12 +1169,32 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */
@@ -1099,12 +1325,32 @@ public class VideosApi {
      *                        <tr>
      *                        <td>201</td>
      *                        <td>Created</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        <tr>
      *                        <td>400</td>
      *                        <td>Bad Request</td>
-     *                        <td>-</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
+     *                        </tr>
+     *                        <tr>
+     *                        <td>429</td>
+     *                        <td>Too Many Requests</td>
+     *                        <td>* X-RateLimit-Limit - The request limit per minute. <br>
+     *                        * X-RateLimit-Remaining - The number of available requests left for the current time
+     *                        window. <br>
+     *                        * X-RateLimit-Retry-After - The number of seconds left until the current rate limit window
+     *                        resets. <br>
+     *                        </td>
      *                        </tr>
      *                        </table>
      */

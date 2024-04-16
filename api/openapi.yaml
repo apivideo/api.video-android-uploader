@@ -233,6 +233,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/video'
           description: Created
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -259,6 +280,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "404":
           content:
             application/json:
@@ -272,6 +314,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    type: https://docs.api.video/reference/too-many-requests
+                    title: Too many requests.
+                    status: 429
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+          description: Too Many Requests
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
       security:
       - apiKey: []
       summary: Upload a video
@@ -539,12 +635,87 @@ paths:
               schema:
                 $ref: '#/components/schemas/video'
           description: Created
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    type: https://docs.api.video/reference/too-many-requests
+                    title: Too many requests.
+                    status: 429
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+          description: Too Many Requests
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
       security: []
       summary: Upload with an delegated upload token
       tags:
@@ -742,6 +913,19 @@ components:
         status:
           type: integer
       title: NotFound
+      type: object
+    too-many-requests:
+      properties:
+        type:
+          description: A link to the error documentation.
+          type: string
+        title:
+          description: A description of the error that occurred.
+          type: string
+        status:
+          description: The HTTP status code.
+          type: integer
+      title: TooManyRequests
       type: object
     video:
       example:
