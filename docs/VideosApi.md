@@ -11,6 +11,7 @@ Method | HTTP request | Description
 <a name="upload"></a>
 # **upload**
 > Video upload(videoId, file)
+> ApiResponse<Video> uploadWithHttpInfo(videoId, file)
 
 Upload a video
 
@@ -124,6 +125,7 @@ Video result = session.uploadLastPart(new File("sample.mp4.partn"));
 <a name="uploadWithUploadToken"></a>
 # **uploadWithUploadToken**
 > Video uploadWithUploadToken(token, file)
+> ApiResponse<Video> uploadWithUploadTokenWithHttpInfo(token, file)
 
 Upload with an delegated upload token
 
