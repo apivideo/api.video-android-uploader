@@ -44,7 +44,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/authenticationinvalid_credentials
+                    type: https://docs.api.video/reference/authentication-invalid-user-credentials
                     title: The user credentials were incorrect.
                     name: ""
                     status: 400
@@ -122,7 +122,7 @@ paths:
                 response:
                   value:
                     status: 400
-                    type: https://docs.api.video/docs/authenticationinvalid_credentials
+                    type: https://docs.api.video/reference/authentication-invalid-user-credentials
                     title: The user credentials were incorrect.
                     name: ""
               schema:
@@ -260,21 +260,21 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/filealreadyuploaded
+                    type: https://docs.api.video/reference/video-source-already-uploaded
                     title: The source of the video is already uploaded.
                     name: file
                     status: 400
                     problems:
-                    - type: https://docs.api.video/docs/filealreadyuploaded
+                    - type: https://docs.api.video/reference/video-source-already-uploaded
                       title: The source of the video is already uploaded.
                       name: file
-                    - type: https://docs.api.video/docs/filealreadyuploaded
+                    - type: https://docs.api.video/reference/video-source-already-uploaded
                       title: The video xxxx has already been uploaded.
                       name: video
-                    - type: https://docs.api.video/docs/filemissing
+                    - type: https://docs.api.video/reference/uploaded-file-no-file
                       title: There is no uploaded file in the request.
                       name: file
-                    - type: https://docs.api.video/docs/multiplefilesuploaded
+                    - type: https://docs.api.video/reference/uploaded-file-multiple-files
                       title: There is more than one uploaded file in the request.
                       name: file
               schema:
@@ -307,7 +307,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: https://docs.api.video/reference/resource-not-found
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -339,7 +339,7 @@ paths:
           content:
             application/json:
               examples:
-                response:
+                Too many requests:
                   value:
                     type: https://docs.api.video/reference/too-many-requests
                     title: Too many requests.
@@ -687,7 +687,7 @@ paths:
           content:
             application/json:
               examples:
-                response:
+                Too many requests:
                   value:
                     type: https://docs.api.video/reference/too-many-requests
                     title: Too many requests.
