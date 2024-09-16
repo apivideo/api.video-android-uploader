@@ -219,7 +219,10 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 4665-07-14T23:36:18.598Z
+                    publishedAt: 2024-07-14T23:36:07+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -621,7 +624,10 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 4665-07-14T23:36:18.598Z
+                    publishedAt: 2024-07-14T23:36:07+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source
                     assets:
@@ -792,8 +798,8 @@ components:
     live-stream-response-example:
       value:
         liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
-        createdAt: 2020-07-29T10:45:35.000Z
-        updatedAt: 2020-07-29T10:45:35.000Z
+        createdAt: 2020-07-29T10:45:35+00:00
+        updatedAt: 2020-07-29T10:45:35+00:00
         streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
         restreams:
         - name: YouTube
@@ -812,6 +818,117 @@ components:
           hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
           thumbnail: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
   parameters:
+    filterBy:
+      $ref: '#/components/parameters/filterBy_2'
+      description: "Use this parameter to filter the API's response based on different\
+        \ data dimensions. You can serialize filters in your query to receive more\
+        \ detailed breakdowns of your analytics.\n\n- If you do not set a value for\
+        \ `filterBy`, the API returns the full dataset for your project.\n- The API\
+        \ only accepts the `mediaId` and `mediaType` filters when you call `/data/metrics/play/total`\
+        \ or `/data/buckets/play-total/media-id`.\n\nThese are the available breakdown\
+        \ dimensions:\n\n- `mediaId`: Returns analytics based on the unique identifiers\
+        \ of a video or a live stream.\n- `mediaType`: Returns analytics based on\
+        \ the type of content. Possible values: `video` and `live-stream`. \n- `continent`:\
+        \ Returns analytics based on the viewers' continent. The list of supported\
+        \ continents names are based on the [GeoNames public database](https://www.geonames.org/countries/).\
+        \ You must use the ISO-3166 alpha2 format, for example `EU`. Possible values\
+        \ are: `AS`, `AF`, `NA`, `SA`, `AN`, `EU`, `AZ`. \n- `country`: Returns analytics\
+        \ based on the viewers' country. The list of supported country names are based\
+        \ on the [GeoNames public database](https://www.geonames.org/countries/).\
+        \ You must use the ISO-3166 alpha2 format, for example `FR`.\n- `deviceType`:\
+        \ Returns analytics based on the type of device used by the viewers. Response\
+        \ values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`,\
+        \ `unknown`.\n- `operatingSystem`: Returns analytics based on the operating\
+        \ system used by the viewers. Response values can include `windows`, `mac\
+        \ osx`, `android`, `ios`, `linux`.\n- `browser`: Returns analytics based on\
+        \ the browser used by the viewers. Response values can include `chrome`, `firefox`,\
+        \ `edge`, `opera`.\n- `tag`: Returns analytics for videos using this tag.\
+        \ This filter only accepts a single value and is case sensitive. Read more\
+        \ about tagging your videos [here](https://docs.api.video/vod/tags-metadata).\n"
+      example: filterBy[country]=FR&filterBy[operatingSystem]=windows&filterBy[browser][]=firefox&filterBy[browser][]=chrome&filterBy[tag]=Cool
+        videos
+      explode: true
+      in: query
+      name: filterBy
+      required: false
+      schema:
+        properties:
+          mediaId:
+            description: Returns analytics based on the unique identifiers of a video
+              or a live stream.
+            example:
+            - vi4blUQJFrYWbaG44NChkH27
+            items:
+              type: string
+            type: array
+          mediaType:
+            enum:
+            - video
+            - live-stream
+            example: video
+            type: string
+          continent:
+            description: Returns analytics based on the viewers' continent. The list
+              of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/).
+              You must use the ISO-3166 alpha2 format, for example `EU`.
+            example:
+            - EU
+            items:
+              enum:
+              - AS
+              - AF
+              - NA
+              - SA
+              - AN
+              - EU
+              - AZ
+              type: string
+            type: array
+          country:
+            description: Returns analytics based on the viewers' country. The list
+              of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/).
+              You must use the ISO-3166 alpha2 format, for example `FR`.
+            example:
+            - FR
+            items:
+              type: string
+            type: array
+          deviceType:
+            description: 'Returns analytics based on the type of device used by the
+              viewers. Response values can include: `computer`, `phone`, `tablet`,
+              `tv`, `console`, `wearable`, `unknown`.'
+            example:
+            - computer
+            items:
+              type: string
+            type: array
+          operatingSystem:
+            description: Returns analytics based on the operating system used by the
+              viewers. Response values can include `windows`, `mac osx`, `android`,
+              `ios`, `linux`.
+            example:
+            - windows
+            items:
+              type: string
+            type: array
+          browser:
+            description: Returns analytics based on the browser used by the viewers.
+              Response values can include `chrome`, `firefox`, `edge`, `opera`.
+            example:
+            - firefox
+            items:
+              type: string
+            type: array
+          tag:
+            description: Returns analytics for videos using this tag. This filter
+              only accepts a single value and is case sensitive. Read more about tagging
+              your videos [here](https://docs.api.video/vod/tags-metadata).
+            example: Cool videos
+            type: string
+        type: object
+        x-is-deep-object: true
+      style: deepObject
+      x-is-deep-object: true
     current-page:
       description: 'Choose the number of search results to return per page. Minimum
         value: 1'
@@ -941,8 +1058,11 @@ components:
           value: John Doe
         - key: Format
           value: Tutorial
-        createdAt: 4251-03-03T12:52:03.085Z
-        publishedAt: 4665-07-14T23:36:18.598Z
+        createdAt: 2024-03-03T12:52:03+00:00
+        publishedAt: 2024-07-14T23:36:07+00:00
+        discarded: false
+        discardedAt: null
+        deletesAt: null
         actions:
         - video_delete
         - video_download
@@ -953,7 +1073,8 @@ components:
           example: vi4k0jvEUuaTdRAEjQ4Prklg
           type: string
         createdAt:
-          description: When a video was created, presented in ISO-8601 format.
+          description: When a video was created, presented in ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
           format: date-time
           type: string
         title:
@@ -968,16 +1089,37 @@ components:
           type: string
         publishedAt:
           description: The date and time the API created the video. Date and time
-            are provided using ISO-8601 UTC format.
-          example: 2019-12-16T08:25:51Z
+            are provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
           format: date-time
           type: string
         updatedAt:
           description: The date and time the video was updated. Date and time are
-            provided using ISO-8601 UTC format.
-          example: 2019-12-16T08:15:51Z
+            provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
           format: date-time
           type: string
+        discardedAt:
+          description: The date and time the video was discarded. The API populates
+            this field only if you have the Video Restore feature enabled and discard
+            a video. Date and time are provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
+          format: date-time
+          nullable: true
+          type: string
+        deletesAt:
+          description: The date and time the video will be permanently deleted. The
+            API populates this field only if you have the Video Restore feature enabled
+            and discard a video. Discarded videos are pemanently deleted after 90
+            days. Date and time are provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
+          format: date-time
+          nullable: true
+          type: string
+        discarded:
+          description: Returns `true` for videos you discarded when you have the Video
+            Restore feature enabled. Returns `false` for every other video.
+          type: boolean
         tags:
           description: "One array of tags (each tag is a string) in order to categorize\
             \ a video. Tags may include spaces. \n"
@@ -987,7 +1129,7 @@ components:
           type: array
         metadata:
           description: |
-            Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.
+            Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
           example: '[{"key":"Author", "value":"John Doe"}, {"key":"Format", "value":"Tutorial"}]'
           items:
             $ref: '#/components/schemas/metadata'
