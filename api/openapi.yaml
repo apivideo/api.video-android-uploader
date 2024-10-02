@@ -1316,4 +1316,214 @@ x-doctave:
   - node
   - php
   - python
+x-webhooks:
+  live-stream.broadcast.started:
+    post:
+      tags:
+      - Webhooks
+      summary: Live stream started
+      description: This webhook triggers when a live stream broadcast is started.
+      operationId: POST-webhooks
+      parameters:
+      - in: header
+        name: X-Api-Video-WebhookID
+        schema:
+          type: string
+        description: The unique ID of your webhook.
+        required: true
+      - in: header
+        name: X-Api-Video-Signature
+        schema:
+          type: string
+        description: The webhook's body encrypted using the webhook's signature secret,
+          in HMAC SHA256. Use this hash to verify that api.video is the origin of
+          this webhook notification.
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: live-stream.broadcast.started
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: 2024-08-151T10:18:47+00:00
+                liveStreamId:
+                  description: The ID of the live stream that started broadcasting.
+                  type: string
+                  example: li400mYKSgQ6xs7taUeSaEap
+      responses:
+        "202":
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to
+            signal that the webhook is accepted.
+  live-stream.broadcast.ended:
+    post:
+      tags:
+      - Webhooks
+      summary: Live stream ended
+      description: This webhook triggers when a live stream broadcast is ended.
+      operationId: POST-webhooks
+      parameters:
+      - in: header
+        name: X-Api-Video-WebhookID
+        schema:
+          type: string
+        description: The unique ID of your webhook.
+        required: true
+      - in: header
+        name: X-Api-Video-Signature
+        schema:
+          type: string
+        description: The webhook's body encrypted using the webhook's signature secret,
+          in HMAC SHA256. Use this hash to verify that api.video is the origin of
+          this webhook notification.
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: live-stream.broadcast.ended
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: 2024-08-151T10:18:47+00:00
+                liveStreamId:
+                  description: The ID of the live stream that ended broadcasting.
+                  type: string
+                  example: li400mYKSgQ6xs7taUeSaEap
+      responses:
+        "202":
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to
+            signal that the webhook is accepted.
+  video.source.recorded:
+    post:
+      tags:
+      - Webhooks
+      summary: Video source recorded
+      description: This webhook triggers when a live stream broadcast is completed
+        and the recording of the stream is ready for transcoding. This means that
+        the video is in queue for transcoding.
+      operationId: POST-webhooks
+      parameters:
+      - in: header
+        name: X-Api-Video-WebhookID
+        schema:
+          type: string
+        description: The unique ID of your webhook.
+        required: true
+      - in: header
+        name: X-Api-Video-Signature
+        schema:
+          type: string
+        description: The webhook's body encrypted using the webhook's signature secret,
+          in HMAC SHA256. Use this hash to verify that api.video is the origin of
+          this webhook notification.
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: video.source.recorded
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: 2024-08-151T10:18:47+00:00
+                liveStreamId:
+                  description: The ID of the live stream that ended broadcasting.
+                  type: string
+                  example: li400mYKSgQ6xs7taUeSaEap
+                videoId:
+                  description: The video ID of the live stream recording.
+                  type: string
+                  example: vi4blUQJFrYWbaG44NChkH11
+      responses:
+        "202":
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to
+            signal that the webhook is accepted.
+  video.encoding.quality.completed:
+    post:
+      tags:
+      - Webhooks
+      summary: Video encoding completed
+      description: This webhook triggers when a new video is uploaded into your account,
+        and all HLS and mp4 quality versions are encoded.
+      operationId: POST-webhooks
+      parameters:
+      - in: header
+        name: X-Api-Video-WebhookID
+        schema:
+          type: string
+        description: The unique ID of your webhook.
+        required: true
+      - in: header
+        name: X-Api-Video-Signature
+        schema:
+          type: string
+        description: The webhook's body encrypted using the webhook's signature secret,
+          in HMAC SHA256. Use this hash to verify that api.video is the origin of
+          this webhook notification.
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: video.encoding.quality.completed
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: 2024-08-151T10:18:47+00:00
+                videoId:
+                  description: The ID of the video where a certain quality version's
+                    encoding is finished.
+                  type: string
+                  example: vi4blUQJFrYWbaG44NChkH11
+                encoding:
+                  description: The type of encoding that is finished.
+                  type: string
+                  enum:
+                  - hls
+                  - mp4
+                  example: hls
+                quality:
+                  description: The quality version of encoding that is finished.
+                  type: string
+                  enum:
+                  - 240p
+                  - 360p
+                  - 480p
+                  - 720p
+                  - 1080p
+                  example: 1080p
+      responses:
+        "202":
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to
+            signal that the webhook is accepted.
 
