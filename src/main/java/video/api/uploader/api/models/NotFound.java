@@ -52,12 +52,12 @@ public class NotFound implements Serializable, DeepObject {
     }
 
     /**
-     * Get type
+     * A link to the error documentation.
      * 
      * @return type
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "A link to the error documentation.")
 
     public String getType() {
         return type;
@@ -73,12 +73,12 @@ public class NotFound implements Serializable, DeepObject {
     }
 
     /**
-     * Get title
+     * A description of the error that occurred.
      * 
      * @return title
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "A description of the error that occurred.")
 
     public String getTitle() {
         return title;
@@ -94,12 +94,12 @@ public class NotFound implements Serializable, DeepObject {
     }
 
     /**
-     * Get name
+     * The name of the parameter that caused the error.
      * 
      * @return name
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "The name of the parameter that caused the error.")
 
     public String getName() {
         return name;
@@ -115,12 +115,12 @@ public class NotFound implements Serializable, DeepObject {
     }
 
     /**
-     * Get status
+     * The HTTP status code.
      * 
      * @return status
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "The HTTP status code.")
 
     public Integer getStatus() {
         return status;
