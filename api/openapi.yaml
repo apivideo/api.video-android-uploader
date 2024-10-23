@@ -1370,7 +1370,7 @@ x-webhooks:
               properties:
                 type:
                   type: string
-                  description: The name of the webhook event that occured.
+                  description: The name of the webhook event that occurred.
                   example: live-stream.broadcast.started
                 emittedAt:
                   description: Returns the date-time when the webhook event occurred.
@@ -1416,7 +1416,7 @@ x-webhooks:
               properties:
                 type:
                   type: string
-                  description: The name of the webhook event that occured.
+                  description: The name of the webhook event that occurred.
                   example: live-stream.broadcast.ended
                 emittedAt:
                   description: Returns the date-time when the webhook event occurred.
@@ -1464,7 +1464,7 @@ x-webhooks:
               properties:
                 type:
                   type: string
-                  description: The name of the webhook event that occured.
+                  description: The name of the webhook event that occurred.
                   example: video.source.recorded
                 emittedAt:
                   description: Returns the date-time when the webhook event occurred.
@@ -1515,7 +1515,7 @@ x-webhooks:
               properties:
                 type:
                   type: string
-                  description: The name of the webhook event that occured.
+                  description: The name of the webhook event that occurred.
                   example: video.encoding.quality.completed
                 emittedAt:
                   description: Returns the date-time when the webhook event occurred.
