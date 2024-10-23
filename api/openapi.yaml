@@ -1023,12 +1023,16 @@ components:
     not-found:
       properties:
         type:
+          description: A link to the error documentation.
           type: string
         title:
+          description: A description of the error that occurred.
           type: string
         name:
+          description: The name of the parameter that caused the error.
           type: string
         status:
+          description: The HTTP status code.
           type: integer
       title: NotFound
       type: object
