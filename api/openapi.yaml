@@ -846,7 +846,10 @@ components:
         \ the browser used by the viewers. Response values can include `chrome`, `firefox`,\
         \ `edge`, `opera`.\n- `tag`: Returns analytics for videos using this tag.\
         \ This filter only accepts a single value and is case sensitive. Read more\
-        \ about tagging your videos [here](https://docs.api.video/vod/tags-metadata).\n"
+        \ about tagging your videos [here](https://docs.api.video/vod/tags-metadata).\n\
+        - `referrer`: Filters data based on the URL where the view is originating\
+        \ from. Accepts an empty string as a value to filter view events where no\
+        \ referrer is available.\n"
       example: filterBy[country]=FR&filterBy[operatingSystem]=windows&filterBy[browser][]=firefox&filterBy[browser][]=chrome&filterBy[tag]=Cool
         videos
       explode: true
@@ -927,6 +930,19 @@ components:
               your videos [here](https://docs.api.video/vod/tags-metadata).
             example: Cool videos
             type: string
+          referrer:
+            description: |-
+              Filters data based on the URL where the view is originating from. This filter parameter accepts an empty string to filter view events where no referrer is available.
+
+              - The API filters for exact matches. Include the trailing `/` characters if needed.
+              - The URLs you add must be URL encoded.
+            example:
+            - https%3A%2F%2Fmy-awesome-videos.com
+            items:
+              format: uri
+              maxLength: 2048
+              type: string
+            type: array
         type: object
         x-is-deep-object: true
       style: deepObject
